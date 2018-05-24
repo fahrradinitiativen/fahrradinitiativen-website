@@ -1,0 +1,40 @@
+.footer {
+    border: 0;
+    border-top: 8px solid $blue;
+    @include border-radius(0);
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    #block-fussbereich {
+        a {
+            padding: 0 0 5px 0;
+            color: $blue;
+            background: transparent;
+            &:hover {
+                opacity: .6;
+            }
+        }
+        margin-bottom: 1em;
+    }
+    #webform-submission-newsletter-block-content-4-add-form {
+        position: relative;
+        .form-actions {
+            position: absolute;
+            right: 0;
+            top: 0;
+            button {
+                margin-right: 0;
+            }
+        }
+    }
+    #block-closure {
+        margin-top: 1em;
+        img {
+            max-width: 150px;
+        }
+    }
+    h2 {
+        font-size: 1em;
+        margin: 0 0 .5em 0;
+    }
+}

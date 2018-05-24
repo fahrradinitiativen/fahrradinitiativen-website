@@ -1,0 +1,111 @@
+#branding {
+    @include border-radius(0);
+    position: relative;
+    border: 0;
+    margin-bottom: 0;
+    padding: 20px 30px;
+    min-height: 160px;
+    background: url(../img/changing-cities.png) right 30px top 15px no-repeat $blue;
+    background-size: 335px;
+    .navbar-brand {
+        font-size: 30px;
+        color: #fff;
+        position: absolute;
+        padding: 0;
+        left: 30px;
+        bottom: 18px;
+        height: auto;
+        line-height: 1;
+    }
+    @media only screen and (max-width: 767px) {
+        min-height: 120px;
+        background: url(../img/changing-cities-mobile.png) bottom 20px center no-repeat $blue;
+        background-size: 260px;
+        padding-bottom: 60px;
+        .navbar-brand {
+            left: 0;
+            width: 100%;
+            text-align: center;
+            bottom: 50px;
+        }
+    }
+}
+
+#navbar {
+    border: 0;
+    @include border-radius(0);
+    border-bottom: 8px solid $blue;
+    margin-bottom: 25px;
+    background: transparent;
+    .navbar-collapse {
+        border: 0;
+    }
+    ul.menu {
+        float: none;
+        li {
+            margin-right: 40px;
+            a {
+                font-size: 20px;
+                font-weight: bold;
+                background: transparent;
+                bottom: -8px;
+                position: relative;
+                color: $blue;
+                border-bottom: 8px solid transparent;
+                &.is-active {
+                    border-bottom-color: $background;
+                }
+                &:hover {
+                    border-bottom-color: rgba(255,255,255,.6);
+                }
+            }
+            &:last-child {
+                float: right;
+            }
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        min-height: 1px;
+        padding-top: 7px;
+        padding-bottom: 7px;
+        .navbar-toggle {
+            @include transition(all .3s ease-in-out);
+            float: none;
+            display: block;
+            margin: 0 auto;
+            border: 0;
+            background: transparent;
+            .icon-bar {
+                @include transition(all .3s ease-in-out);
+                background-color: $blue;
+                width: 24px;
+                height: 4px;
+            }
+            &:hover, &:active {
+                .icon-bar {
+                    background-color: $turquoise;
+                }
+            }
+        }
+        ul.menu {
+            float: none;
+            li {
+                margin-right: 0;
+                a {
+                    border: 0;
+                    text-align: center;
+                    bottom: 0;
+                    &.is-active {
+                        color: $turquoise;
+                    }
+                    &:hover {
+                        color: $turquoise;
+                    }
+                }
+                &:last-child {
+                    float: none;
+                }
+            }
+        }
+    }
+}

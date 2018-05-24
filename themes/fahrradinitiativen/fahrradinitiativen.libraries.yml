@@ -1,0 +1,8 @@
+global-styling:
+  css:
+    theme:
+      css/style.css: {}
+global-scripts:
+  js:
+    js/bigSlide.js: {}
+    js/scripts.js: {}

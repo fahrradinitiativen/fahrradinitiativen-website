@@ -1,0 +1,77 @@
+{%
+  set classes = [
+    node.bundle|clean_class,
+    node.isPromoted() ? 'is-promoted',
+    node.isSticky() ? 'is-sticky',
+    not node.isPublished() ? 'is-unpublished',
+    view_mode ? view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+
+
+    {# Page #}
+    {% if page %}
+                <div class="row">
+            <div class="col-sm-9">
+<article{{ attributes.addClass(classes) }}>  
+
+        
+
+                {{ content.field_image }}
+                {{ content.field_logo }}
+                {% if content.field_logo['#items'] is empty %}
+                <h1{{ title_attributes }}>
+                    {{ label }}
+                </h1>
+                {% endif %}
+                {{ content|without('field_image','field_logo','field_email','field_link','field_facebook','field_twitter','field_linkedin','field_xing','field_kontakt','field_vcf','field_tags_initiativen','field_tags','field_experten') }}
+
+
+
+</article>
+            </div>
+                <aside class="col-sm-3 region-sidebar-second">
+                    <div class="block">
+                        <h2 class="block-title">Kontakt</h2>
+                        {{ content.field_email }}
+                        {{ content.field_link }}
+                        {{ content.field_facebook }}
+                        {{ content.field_twitter }}
+                        {{ content.field_linkedin }}
+                        {{ content.field_xing }}
+                        {{ content.field_kontakt }}
+                        {{ content.field_vcf }}
+                    </div>
+                    {% if content.field_tags_initiativen['#items'] is not empty %}
+                    <div class="block">
+                        {{ content.field_tags_initiativen }}
+                    </div>
+                    {% endif %}
+                    {% if content.field_experten['#items'] is not empty %}
+                    <div class="block">
+                        {{ content.field_experten }}
+                    </div>
+                    {% endif %}
+                    {% if content.field_tags['#items'] is not empty %}
+                    <div class="block">
+                        {{ content.field_tags }}
+                    </div>
+                    {% endif %}
+                </aside>
+    </div>
+
+    
+        {# Teaser #}
+    {% else %}
+        <article{{ attributes.addClass(classes) }}>  
+        {{ content.field_image }}
+        {{ content.field_logo }}
+        {{ title_prefix }}
+            <h2{{ title_attributes }}>
+                <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+            </h2>
+        {{ title_suffix }}
+        {{ content|without('field_image','field_logo') }}
+        </article>
+            {% endif %}

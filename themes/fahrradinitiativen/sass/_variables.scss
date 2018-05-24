@@ -1,0 +1,28 @@
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+// .transition { @include transition(all .3s ease-in-out); }
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+//.box { @include border-radius(10px); }
+
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+ @import url('https://use.fontawesome.com/releases/v5.0.8/css/all.css');
+
+// font-family: 'Open Sans', sans-serif;
+
+
+$blue: #273748;
+$background: #e9ebed;
+$turquoise: #009db1;
+
+$text: #273748;

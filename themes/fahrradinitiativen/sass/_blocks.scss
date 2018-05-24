@@ -1,0 +1,174 @@
+    aside.col-sm-3 {
+        @media only screen and (min-width: 768px) {
+            padding-left: 0;
+        }
+    }
+    
+    .region-sidebar-second {
+        .block {
+            background: $blue;
+            color: #fff;
+            margin-bottom: 15px;
+            padding: 15px;
+            .field--name-field-tags {
+                margin-top: 0;
+            }
+            h2.block-title,
+            .field--name-field-tags-initiativen .field--label,
+            .field--name-field-tags .field--label {
+                font-size: 18px;
+                color: #fff;
+                font-weight: bold;
+                border-bottom: 3px solid #fff;
+                margin: 0 0 6px 0;
+                padding: 0 0 6px 0;
+            }
+            a {
+                color: #fff;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            .field--name-field-email,
+            .field--name-field-link {
+                margin-bottom: 6px;
+                a {
+                    font-size: 13px;
+                }
+            }
+            .field--name-field-facebook,
+            .field--name-field-twitter,
+            .field--name-field-xing,
+            .field--name-field-linkedin {
+                margin-top: 9px;
+                display: inline-block;
+                a {
+                    display: inline-block;
+                    width: 24px;
+                    height: 24px;
+                    text-indent: -9999em;
+                    margin-right: 6px;
+                    background: url(../img/facebook.png) no-repeat center center;
+                    background-size: cover;
+                    &:hover {
+                        opacity: .6;
+                    }
+                }
+            }
+            .field--name-field-twitter {
+                a {
+                    background-image: url(../img/twitter.png);
+                }
+            }
+            .field--name-field-xing {
+                a {
+                    background-image: url(../img/xing.png);
+                }
+            }
+            .field--name-field-linkedin {
+                a {
+                    background-image: url(../img/linkedin.png);
+                }
+            }
+            .field--name-field-vcf {
+                border-top: 3px solid rgba(255,255,255,.3);
+                margin-top: 12px;
+                padding-top: 9px;
+                .file {
+                    margin: 0;
+                    font-size: 13px;
+                    span {
+                        background: url(../img/download.png) no-repeat left center transparent;
+                        background-size: 18px;
+                        font-weight: normal;
+                        border: 0;
+                        padding: 0 0 0 30px;
+                        &.file-icon,
+                        &.file-size {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    #block-initiativen {
+        .field--name-body {
+            ul {
+                padding: 0;
+                margin: .75em 0 0;
+                li {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0 0 6px 0;
+                    a {
+                        display: block;
+                        background: url(../img/arrow.png) no-repeat center left;
+                        background-size: 22px;
+                        padding-left: 26px;
+                        color: #fff;
+                        &:hover {
+                            opacity: .6;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    #block-views-tags-block {
+        .view-content {
+            margin: .75em 0 0;
+            div {
+                display: inline;
+                a {
+                    color: #fff;
+                    &:after {
+                        content: ", ";
+                    }
+                    &:hover {
+                        opacity: .6;
+                    }
+                }
+                &:last-child a:after {
+                    content: "";
+                }
+            }
+        }
+    }
+    
+    #block-views-blog-block {
+        .view-content {
+            margin: .75em 0 0;
+            .views-row {
+                margin-bottom: .75em;
+                a {
+                    display: block;
+                    font-weight: bold;
+                    color: #fff;
+                    &:hover {
+                        opacity: .6;
+                    }
+                }
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+            
+        }
+    }
+    
+    // Footer
+    #block-fahrradinitiativen-search {
+        h2 {
+            position: relative !important;
+            clip: auto;
+            height: auto;
+            width: auto;
+        }
+        .description {
+            display: none;
+        }
+    }
