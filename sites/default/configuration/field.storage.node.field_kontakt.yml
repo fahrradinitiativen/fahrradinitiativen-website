@@ -1,0 +1,19 @@
+uuid: 9d62a75e-1915-42e0-a26c-433331bb9811
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_kontakt
+field_name: field_kontakt
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,24 @@
+uuid: a64cad7f-4c29-4011-b9a7-e651eb022386
+langcode: de
+status: true
+dependencies:
+  module:
+    - block_class
+    - masquerade
+  theme:
+    - fahrradinitiativen
+third_party_settings:
+  block_class:
+    classes: ''
+id: masquerade
+theme: fahrradinitiativen
+region: footer
+weight: 0
+provider: null
+plugin: masquerade
+settings:
+  id: masquerade
+  label: Masquerade
+  provider: masquerade
+  label_display: visible
+visibility: {  }

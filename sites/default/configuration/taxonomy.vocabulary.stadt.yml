@@ -1,0 +1,9 @@
+uuid: 15ec0a81-71f0-4768-a044-77505b9ca70a
+langcode: de
+status: true
+dependencies: {  }
+name: Stadt
+vid: stadt
+description: ''
+hierarchy: 0
+weight: 0

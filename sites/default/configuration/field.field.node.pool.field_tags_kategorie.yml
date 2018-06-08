@@ -1,0 +1,29 @@
+uuid: c2ecc62c-f372-4429-8a2d-af02dc2ba9c7
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags_kategorie
+    - node.type.pool
+    - taxonomy.vocabulary.kategorie
+id: node.pool.field_tags_kategorie
+field_name: field_tags_kategorie
+entity_type: node
+bundle: pool
+label: Kategorie
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      kategorie: kategorie
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

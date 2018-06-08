@@ -1,0 +1,9 @@
+uuid: 35e4f3a3-ae35-4a69-a8d8-6eaaf1f91bce
+langcode: de
+status: true
+dependencies: {  }
+name: Art
+vid: art
+description: ''
+hierarchy: 0
+weight: 0

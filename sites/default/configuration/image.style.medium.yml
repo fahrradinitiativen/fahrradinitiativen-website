@@ -1,0 +1,16 @@
+uuid: ab5562e8-eccb-48be-a3da-24dfb381189f
+langcode: de
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: Y9NmnZHQq20ASSyTNA6JnwtWrJJiSajOehGDtmUFdM0
+name: medium
+label: 'Mittel (300x300)'
+effects:
+  75e1a58f-8f4f-4f32-972e-d0cd8b92615f:
+    uuid: 75e1a58f-8f4f-4f32-972e-d0cd8b92615f
+    id: image_scale_and_crop
+    weight: 2
+    data:
+      width: 300
+      height: 300

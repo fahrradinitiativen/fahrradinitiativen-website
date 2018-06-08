@@ -1,0 +1,14 @@
+uuid: 487013fb-ff88-4bff-bbe2-112593db549e
+name: fahrrad-Initiativen.de
+mail: no-reply@fahrrad-initiativen.de
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node/38
+admin_compact_mode: false
+weight_select_max: 100
+langcode: de
+default_langcode: de
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI

@@ -1,0 +1,11 @@
+uuid: f24781b4-6d19-4738-9ddc-4647d544ecd3
+langcode: de
+status: true
+dependencies:
+  config:
+    - block_content.type.webform
+id: block_content.webform
+target_entity_type_id: block_content
+target_bundle: webform
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,21 @@
+uuid: 82a526da-2ca2-4393-886a-11920133fc73
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_kontakt
+    - node.type.pool
+  module:
+    - text
+id: node.pool.field_kontakt
+field_name: field_kontakt
+entity_type: node
+bundle: pool
+label: Kontakt
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

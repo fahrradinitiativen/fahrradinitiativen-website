@@ -1,0 +1,19 @@
+uuid: 2d987848-40ef-4c35-b50e-ccf1016930ee
+langcode: de
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_xing
+field_name: field_xing
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,87 @@
+uuid: ff70c551-0c02-46b9-8b61-4e5798027d36
+langcode: de
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.pool.body
+    - field.field.node.pool.field_email
+    - field.field.node.pool.field_experten
+    - field.field.node.pool.field_facebook
+    - field.field.node.pool.field_image
+    - field.field.node.pool.field_images
+    - field.field.node.pool.field_kontakt
+    - field.field.node.pool.field_link
+    - field.field.node.pool.field_linkedin
+    - field.field.node.pool.field_logo
+    - field.field.node.pool.field_subline
+    - field.field.node.pool.field_tags
+    - field.field.node.pool.field_tags_art
+    - field.field.node.pool.field_tags_bundesland
+    - field.field.node.pool.field_tags_initiativen
+    - field.field.node.pool.field_tags_kategorie
+    - field.field.node.pool.field_tags_stadt
+    - field.field.node.pool.field_teaser
+    - field.field.node.pool.field_twitter
+    - field.field.node.pool.field_vcf
+    - field.field.node.pool.field_xing
+    - node.type.pool
+  module:
+    - image
+    - text
+    - user
+id: node.pool.teaser
+targetEntityType: node
+bundle: pool
+mode: teaser
+content:
+  field_image:
+    type: image
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: content
+    third_party_settings: {  }
+  field_logo:
+    type: image
+    weight: 0
+    region: content
+    label: visually_hidden
+    settings:
+      image_style: ''
+      image_link: content
+    third_party_settings: {  }
+  field_teaser:
+    type: text_default
+    weight: 2
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  field_email: true
+  field_experten: true
+  field_facebook: true
+  field_images: true
+  field_kontakt: true
+  field_link: true
+  field_linkedin: true
+  field_subline: true
+  field_tags: true
+  field_tags_art: true
+  field_tags_bundesland: true
+  field_tags_initiativen: true
+  field_tags_kategorie: true
+  field_tags_stadt: true
+  field_twitter: true
+  field_vcf: true
+  field_xing: true
+  langcode: true

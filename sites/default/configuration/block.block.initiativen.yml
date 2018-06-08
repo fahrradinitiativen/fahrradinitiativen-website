@@ -1,0 +1,35 @@
+uuid: ec7aab25-6764-40af-9047-7c905bc384e3
+langcode: de
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:0888df12-13c7-4108-9308-1c32b3af63d6'
+  module:
+    - block_class
+    - block_content
+    - system
+  theme:
+    - fahrradinitiativen
+third_party_settings:
+  block_class:
+    classes: ''
+id: initiativen
+theme: fahrradinitiativen
+region: sidebar_second
+weight: -6
+provider: null
+plugin: 'block_content:0888df12-13c7-4108-9308-1c32b3af63d6'
+settings:
+  id: 'block_content:0888df12-13c7-4108-9308-1c32b3af63d6'
+  label: Initiativen
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: "/beitraege\r\n/beitraege/*\r\n/taxonomy/*"
+    negate: false
+    context_mapping: {  }

@@ -1,0 +1,23 @@
+uuid: 69c6dfc9-d96c-48fe-a56f-e50e75d0ca26
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_xing
+    - node.type.pool
+  module:
+    - link
+id: node.pool.field_xing
+field_name: field_xing
+entity_type: node
+bundle: pool
+label: Xing
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

@@ -1,0 +1,9 @@
+uuid: 325bc4f9-c974-4db7-b9e6-7faf96251758
+langcode: de
+status: true
+dependencies: {  }
+name: Kategorie
+vid: kategorie
+description: ''
+hierarchy: 0
+weight: 0

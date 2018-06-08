@@ -1,0 +1,19 @@
+uuid: 96cb5f10-e6ca-476e-8b74-5f8b5e055082
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_email
+    - node.type.pool
+id: node.pool.field_email
+field_name: field_email
+entity_type: node
+bundle: pool
+label: E-Mail
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

@@ -1,0 +1,29 @@
+uuid: e0c91f99-3a20-4131-9108-2bb62876d14c
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags_initiativen
+    - node.type.pool
+    - taxonomy.vocabulary.initiativen
+id: node.pool.field_tags_initiativen
+field_name: field_tags_initiativen
+entity_type: node
+bundle: pool
+label: Initiativen
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      initiativen: initiativen
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,20 @@
+uuid: 5c6d3723-a3b7-42c1-a977-39302a7a6eae
+langcode: de
+status: true
+dependencies:
+  theme:
+    - fahrradinitiativen
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: fahrradinitiativen_local_actions
+theme: fahrradinitiativen
+region: content
+weight: -7
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primäre Admin-Aktionen'
+  provider: core
+  label_display: '0'
+visibility: {  }

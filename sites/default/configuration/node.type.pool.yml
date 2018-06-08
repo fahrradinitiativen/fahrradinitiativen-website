@@ -1,0 +1,17 @@
+uuid: 9001d984-6c71-4bc1-82f2-1d1b3ece198d
+langcode: de
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Pool
+type: pool
+description: Pool
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

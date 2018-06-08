@@ -1,0 +1,20 @@
+uuid: a288fa2f-1429-40ec-ae21-b7f35cc01ca1
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_tags_art
+field_name: field_tags_art
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

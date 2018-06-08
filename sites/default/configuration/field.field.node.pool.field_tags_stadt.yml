@@ -1,0 +1,29 @@
+uuid: 6b7de624-9e59-4788-8fc7-d0d6a6ce6a2a
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags_stadt
+    - node.type.pool
+    - taxonomy.vocabulary.stadt
+id: node.pool.field_tags_stadt
+field_name: field_tags_stadt
+entity_type: node
+bundle: pool
+label: Stadt
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      stadt: stadt
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

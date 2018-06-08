@@ -1,0 +1,9 @@
+uuid: 37501d6c-7c14-49be-a997-5b7a7799904c
+langcode: de
+status: true
+dependencies: {  }
+name: Initiativen
+vid: initiativen
+description: ''
+hierarchy: 0
+weight: 0

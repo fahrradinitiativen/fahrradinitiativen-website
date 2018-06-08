@@ -1,0 +1,22 @@
+uuid: 87db4edc-0278-4080-a3df-2afc0fb6ee79
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.pool
+  module:
+    - text
+id: node.pool.body
+field_name: body
+entity_type: node
+bundle: pool
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

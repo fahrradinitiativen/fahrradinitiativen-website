@@ -1,0 +1,11 @@
+uuid: 67d782fd-b7ff-4ab5-9d0c-0a2b85ad5b56
+langcode: de
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.stadt
+id: taxonomy_term.stadt
+target_entity_type_id: taxonomy_term
+target_bundle: stadt
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,333 @@
+uuid: 4591daa3-61cf-4257-9347-6bac211f67c4
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.pool.body
+    - field.field.node.pool.field_email
+    - field.field.node.pool.field_experten
+    - field.field.node.pool.field_facebook
+    - field.field.node.pool.field_image
+    - field.field.node.pool.field_images
+    - field.field.node.pool.field_kontakt
+    - field.field.node.pool.field_link
+    - field.field.node.pool.field_linkedin
+    - field.field.node.pool.field_logo
+    - field.field.node.pool.field_subline
+    - field.field.node.pool.field_tags
+    - field.field.node.pool.field_tags_art
+    - field.field.node.pool.field_tags_bundesland
+    - field.field.node.pool.field_tags_initiativen
+    - field.field.node.pool.field_tags_kategorie
+    - field.field.node.pool.field_tags_stadt
+    - field.field.node.pool.field_teaser
+    - field.field.node.pool.field_twitter
+    - field.field.node.pool.field_vcf
+    - field.field.node.pool.field_xing
+    - image.style.thumbnail
+    - node.type.pool
+  module:
+    - field_group
+    - file
+    - image
+    - link
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_content:
+      children:
+        - field_image
+        - field_logo
+        - field_subline
+        - field_teaser
+        - body
+        - field_images
+      parent_name: ''
+      weight: 6
+      format_type: tab
+      format_settings:
+        label: Inhalt
+        formatter: closed
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Inhalt
+    group_tags:
+      children:
+        - field_tags_bundesland
+        - field_tags_stadt
+        - field_tags_kategorie
+        - field_tags_art
+        - field_experten
+        - field_tags
+        - field_tags_initiativen
+      parent_name: ''
+      weight: 8
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Tags
+    group_contact:
+      children:
+        - field_email
+        - field_link
+        - field_kontakt
+        - field_facebook
+        - field_twitter
+        - field_linkedin
+        - field_xing
+        - field_vcf
+      parent_name: ''
+      weight: 7
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Kontakt
+id: node.pool.default
+targetEntityType: node
+bundle: pool
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 126
+    settings:
+      rows: 9
+      placeholder: ''
+      summary_rows: 3
+    third_party_settings: {  }
+    region: content
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_email:
+    weight: 135
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_experten:
+    weight: 132
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_facebook:
+    weight: 138
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_image:
+    weight: 122
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_images:
+    weight: 127
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_kontakt:
+    weight: 137
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_link:
+    weight: 136
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_linkedin:
+    weight: 140
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_logo:
+    weight: 123
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_subline:
+    weight: 124
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_tags:
+    weight: 133
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_tags_art:
+    weight: 131
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_tags_bundesland:
+    weight: 128
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_tags_initiativen:
+    weight: 134
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_tags_kategorie:
+    weight: 130
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_tags_stadt:
+    weight: 129
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_teaser:
+    weight: 125
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_twitter:
+    weight: 139
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_vcf:
+    weight: 142
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_xing:
+    weight: 141
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 4
+    region: content
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 10
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    region: content
+    third_party_settings: {  }
+hidden: {  }

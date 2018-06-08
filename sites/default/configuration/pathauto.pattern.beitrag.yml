@@ -1,0 +1,22 @@
+uuid: 4cc8b4b9-0e49-4755-a5af-138f64d170ca
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+id: beitrag
+label: Beitrag
+type: 'canonical_entities:node'
+pattern: 'beitraege/[node:title]'
+selection_criteria:
+  56ea6c8a-e641-43af-b0a5-2c03e87dc7a6:
+    id: node_type
+    bundles:
+      blog: blog
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 56ea6c8a-e641-43af-b0a5-2c03e87dc7a6
+selection_logic: and
+weight: -5
+relationships: {  }

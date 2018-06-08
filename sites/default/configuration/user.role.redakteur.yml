@@ -1,0 +1,50 @@
+uuid: 82b8f3da-af8a-4556-9edf-da7cfe3ae216
+langcode: de
+status: true
+dependencies: {  }
+id: redakteur
+label: Redakteur
+weight: -8
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access in-place editing'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'administer menu'
+  - 'administer taxonomy'
+  - 'create blog content'
+  - 'create page content'
+  - 'create pool content'
+  - 'create terms in art'
+  - 'create terms in bundesland'
+  - 'create terms in initiativen'
+  - 'create terms in kategorie'
+  - 'create terms in stadt'
+  - 'create terms in tags'
+  - 'delete any blog content'
+  - 'delete any pool content'
+  - 'delete own blog content'
+  - 'delete own pool content'
+  - 'delete terms in art'
+  - 'delete terms in bundesland'
+  - 'delete terms in initiativen'
+  - 'delete terms in kategorie'
+  - 'delete terms in stadt'
+  - 'delete terms in tags'
+  - 'edit any blog content'
+  - 'edit any page content'
+  - 'edit any pool content'
+  - 'edit own blog content'
+  - 'edit own page content'
+  - 'edit own pool content'
+  - 'edit terms in art'
+  - 'edit terms in bundesland'
+  - 'edit terms in initiativen'
+  - 'edit terms in kategorie'
+  - 'edit terms in stadt'
+  - 'edit terms in tags'
+  - 'use text format full_html'
+  - 'use text format restricted_html'
+  - 'view own unpublished content'
+  - 'view the administration theme'

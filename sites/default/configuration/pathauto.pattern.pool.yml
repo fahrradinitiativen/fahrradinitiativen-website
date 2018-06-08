@@ -1,0 +1,22 @@
+uuid: 85b26a0f-d059-4431-bec3-f0ec6039e5af
+langcode: de
+status: true
+dependencies:
+  module:
+    - node
+id: pool
+label: Pool
+type: 'canonical_entities:node'
+pattern: 'pool/[node:title]'
+selection_criteria:
+  820345ce-913f-4091-a1c1-175db75453a3:
+    id: node_type
+    bundles:
+      pool: pool
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 820345ce-913f-4091-a1c1-175db75453a3
+selection_logic: and
+weight: -5
+relationships: {  }

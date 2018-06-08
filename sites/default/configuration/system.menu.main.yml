@@ -1,0 +1,10 @@
+uuid: 963ffa23-8307-49a9-a820-f1cf56cecea6
+langcode: de
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: Q2Ra3jfoIVk0f3SjxJX61byRQFVBAbpzYDQOiY-kno8
+id: main
+label: 'Main navigation'
+description: 'Links zu den wichtigsten Seitenbereichen'
+locked: true

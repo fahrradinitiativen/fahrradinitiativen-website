@@ -1,0 +1,34 @@
+uuid: c8550bb5-806a-4369-93d0-9122bea3d6d6
+langcode: de
+status: true
+dependencies:
+  config:
+    - views.view.front
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - fahrradinitiativen
+third_party_settings:
+  block_class:
+    classes: ''
+id: views_block_front_experts
+theme: fahrradinitiativen
+region: content
+weight: -1
+provider: null
+plugin: 'views_block:front-block_2'
+settings:
+  id: 'views_block:front-block_2'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

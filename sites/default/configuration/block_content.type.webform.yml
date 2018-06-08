@@ -1,0 +1,8 @@
+uuid: 4336ef15-f757-4f89-81d2-fe531f5ea554
+langcode: de
+status: true
+dependencies: {  }
+id: webform
+label: Webform
+revision: 0
+description: Formular

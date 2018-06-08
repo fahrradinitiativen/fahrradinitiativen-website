@@ -1,0 +1,17 @@
+uuid: 0ff1ded4-32b8-4ade-a624-3948fbd605d0
+langcode: de
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Beitrag
+type: blog
+description: Beiträge
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

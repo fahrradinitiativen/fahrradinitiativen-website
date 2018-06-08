@@ -1,0 +1,17 @@
+uuid: 41c0d2d0-920a-4998-a814-d5cdcca6a366
+langcode: de
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: cCiWdBHgLwj5omG35lsKc4LkW4MBdmcctkVop4ol5x0
+name: thumbnail
+label: 'Vorschaubild (100x100)'
+effects:
+  ac93048a-4b2b-41e8-b464-49c46a2940b9:
+    uuid: ac93048a-4b2b-41e8-b464-49c46a2940b9
+    id: image_scale
+    weight: 1
+    data:
+      width: null
+      height: 100
+      upscale: true

@@ -1,0 +1,21 @@
+uuid: 786f03dc-783a-4bc5-a4f1-b4c9af4a2cf8
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_subline
+    - node.type.pool
+  module:
+    - text
+id: node.pool.field_subline
+field_name: field_subline
+entity_type: node
+bundle: pool
+label: Subline
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

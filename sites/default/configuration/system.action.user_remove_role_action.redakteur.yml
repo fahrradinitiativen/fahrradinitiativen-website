@@ -1,0 +1,14 @@
+uuid: 9d2f2c82-6fd4-4638-b40c-6de53b2b1d9f
+langcode: de
+status: true
+dependencies:
+  config:
+    - user.role.redakteur
+  module:
+    - user
+id: user_remove_role_action.redakteur
+label: 'Remove the Redakteur role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: redakteur

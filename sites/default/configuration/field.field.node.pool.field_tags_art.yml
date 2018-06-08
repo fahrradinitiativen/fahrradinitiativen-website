@@ -1,0 +1,29 @@
+uuid: 38438e4a-b6c9-4253-87db-380e16f263e8
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags_art
+    - node.type.pool
+    - taxonomy.vocabulary.art
+id: node.pool.field_tags_art
+field_name: field_tags_art
+entity_type: node
+bundle: pool
+label: Art
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      art: art
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

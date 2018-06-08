@@ -1,0 +1,9 @@
+uuid: 3ac83c88-f3da-4cb8-bf0b-a4c96db60acd
+langcode: de
+status: true
+dependencies: {  }
+name: Bundesland
+vid: bundesland
+description: ''
+hierarchy: 0
+weight: 0

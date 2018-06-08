@@ -1,0 +1,29 @@
+uuid: 4c17f43a-cf89-4a6f-bc31-f4b8b3be9687
+langcode: de
+status: true
+dependencies:
+  content:
+    - 'block_content:webform:7f7d451e-f44f-4505-84de-55a2338aa0c6'
+  module:
+    - block_class
+    - block_content
+  theme:
+    - fahrradinitiativen
+third_party_settings:
+  block_class:
+    classes: col-sm-4
+id: newsletterbestellen
+theme: fahrradinitiativen
+region: footer
+weight: -6
+provider: null
+plugin: 'block_content:7f7d451e-f44f-4505-84de-55a2338aa0c6'
+settings:
+  id: 'block_content:7f7d451e-f44f-4505-84de-55a2338aa0c6'
+  label: 'newsletter bestellen'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

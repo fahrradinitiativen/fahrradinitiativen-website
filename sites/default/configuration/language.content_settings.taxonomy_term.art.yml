@@ -1,0 +1,11 @@
+uuid: c60f5fbd-37df-4887-96a3-f31869692fae
+langcode: de
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.art
+id: taxonomy_term.art
+target_entity_type_id: taxonomy_term
+target_bundle: art
+default_langcode: site_default
+language_alterable: false

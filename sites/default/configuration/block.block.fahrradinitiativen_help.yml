@@ -1,0 +1,22 @@
+uuid: eac8d481-f618-4103-8882-46ad9d54b3b2
+langcode: de
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - fahrradinitiativen
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: fahrradinitiativen_help
+theme: fahrradinitiativen
+region: content
+weight: -8
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Hilfe
+  provider: help
+  label_display: '0'
+visibility: {  }

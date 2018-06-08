@@ -1,0 +1,21 @@
+uuid: 28623989-c06d-4f31-a8a2-a7a1a3628103
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_teaser
+    - node.type.pool
+  module:
+    - text
+id: node.pool.field_teaser
+field_name: field_teaser
+entity_type: node
+bundle: pool
+label: Teaser
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,22 @@
+uuid: 0f915737-6951-4578-a008-43e3796c0dc7
+langcode: de
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - fahrradinitiativen
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: fahrradinitiativen_messages
+theme: fahrradinitiativen
+region: highlighted
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Status-Nachrichten
+  provider: system
+  label_display: '0'
+visibility: {  }

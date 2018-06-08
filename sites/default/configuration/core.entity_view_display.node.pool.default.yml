@@ -1,0 +1,197 @@
+uuid: aec2c6bd-ae2d-479b-8ff5-cee9dc281ebc
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.pool.body
+    - field.field.node.pool.field_email
+    - field.field.node.pool.field_experten
+    - field.field.node.pool.field_facebook
+    - field.field.node.pool.field_image
+    - field.field.node.pool.field_images
+    - field.field.node.pool.field_kontakt
+    - field.field.node.pool.field_link
+    - field.field.node.pool.field_linkedin
+    - field.field.node.pool.field_logo
+    - field.field.node.pool.field_subline
+    - field.field.node.pool.field_tags
+    - field.field.node.pool.field_tags_art
+    - field.field.node.pool.field_tags_bundesland
+    - field.field.node.pool.field_tags_initiativen
+    - field.field.node.pool.field_tags_kategorie
+    - field.field.node.pool.field_tags_stadt
+    - field.field.node.pool.field_teaser
+    - field.field.node.pool.field_twitter
+    - field.field.node.pool.field_vcf
+    - field.field.node.pool.field_xing
+    - node.type.pool
+  module:
+    - file
+    - image
+    - link
+    - text
+    - user
+id: node.pool.default
+targetEntityType: node
+bundle: pool
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_email:
+    weight: 10
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: email_mailto
+    region: content
+  field_experten:
+    type: entity_reference_label
+    weight: 6
+    region: content
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_facebook:
+    weight: 12
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_images:
+    weight: 9
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: file
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_kontakt:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_link:
+    weight: 11
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_linkedin:
+    weight: 14
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_logo:
+    weight: 8
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_subline:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_tags:
+    weight: 7
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_tags_initiativen:
+    weight: 5
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_twitter:
+    weight: 13
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_vcf:
+    weight: 4
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_xing:
+    weight: 15
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  links:
+    weight: 16
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_tags_art: true
+  field_tags_bundesland: true
+  field_tags_kategorie: true
+  field_tags_stadt: true
+  field_teaser: true
+  langcode: true

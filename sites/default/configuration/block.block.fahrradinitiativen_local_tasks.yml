@@ -1,0 +1,22 @@
+uuid: 7103cd5a-869d-456b-8571-01f2e8560826
+langcode: de
+status: true
+dependencies:
+  theme:
+    - fahrradinitiativen
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: fahrradinitiativen_local_tasks
+theme: fahrradinitiativen
+region: content
+weight: -5
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

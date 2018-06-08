@@ -1,0 +1,26 @@
+uuid: 77825283-7ea4-43df-8cfa-b40eae0d715c
+langcode: de
+status: true
+dependencies:
+  module:
+    - block_class
+    - search
+  theme:
+    - fahrradinitiativen
+third_party_settings:
+  block_class:
+    classes: col-sm-4
+_core:
+  default_config_hash: za-39d5WDUg6XvbyqSnuVYEeq6QM4qKJxW8MnoAha5A
+id: fahrradinitiativen_search
+theme: fahrradinitiativen
+region: footer
+weight: -7
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: suche
+  provider: search
+  label_display: visible
+visibility: {  }

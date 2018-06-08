@@ -1,0 +1,27 @@
+uuid: 05c6eed9-7f3f-4736-97e6-931ea0bd35ca
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_vcf
+    - node.type.pool
+  module:
+    - file
+id: node.pool.field_vcf
+field_name: field_vcf
+entity_type: node
+bundle: pool
+label: 'Kontakt speichern (.vcf)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: vcf
+  max_filesize: ''
+  description_field: true
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

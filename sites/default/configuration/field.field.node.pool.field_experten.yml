@@ -1,0 +1,27 @@
+uuid: 28b732a7-f639-46ae-bded-665bda44adf1
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_experten
+    - node.type.pool
+id: node.pool.field_experten
+field_name: field_experten
+entity_type: node
+bundle: pool
+label: Experten
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      pool: pool
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
