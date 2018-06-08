@@ -5,6 +5,7 @@ sites/example.sites.php
 # Ignore paths that contain generated content.
 files/
 sites/*/files
+nbproject
 
 .htaccess
 web.config
