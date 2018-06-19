@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600");
 @import url("https://use.fontawesome.com/releases/v5.0.8/css/all.css");
 html, body {
   background: #e9ebed;
@@ -32,7 +32,7 @@ a:hover, a:active {
 
 h1, .h1 {
   font-size: 26px;
-  font-weight: bold;
+  font-weight: 600;
   margin-top: 0; }
 
 .form-control {
@@ -87,14 +87,18 @@ h1, .h1 {
         bottom: 50px; } }
 
 #navbar {
+  z-index: 1001;
+  width: 100%;
+  max-width: 100%;
   border: 0;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
   border-radius: 0;
-  border-bottom: 8px solid #273748;
   margin-bottom: 25px;
-  background: transparent; }
+  background: #e9ebed; }
+  #navbar .navbar-wrapper {
+    border-bottom: 8px solid #273748; }
   #navbar .navbar-collapse {
     border: 0; }
   #navbar ul.menu {
@@ -103,7 +107,7 @@ h1, .h1 {
       margin-right: 40px; }
       #navbar ul.menu li a {
         font-size: 20px;
-        font-weight: bold;
+        font-weight: 600;
         background: transparent;
         bottom: -8px;
         position: relative;
@@ -157,6 +161,10 @@ h1, .h1 {
           #navbar ul.menu li:last-child {
             float: none; } }
 
+.stuck {
+  position: fixed;
+  top: 0; }
+
 .footer {
   border: 0;
   border-top: 8px solid #273748;
@@ -207,7 +215,7 @@ h1, .h1 {
   .region-sidebar-second .block .field--name-field-tags .field--label {
     font-size: 18px;
     color: #fff;
-    font-weight: bold;
+    font-weight: 600;
     border-bottom: 3px solid #fff;
     margin: 0 0 6px 0;
     padding: 0 0 6px 0; }
@@ -301,7 +309,7 @@ h1, .h1 {
     margin-bottom: .75em; }
     #block-views-blog-block .view-content .views-row a {
       display: block;
-      font-weight: bold;
+      font-weight: 600;
       color: #fff; }
       #block-views-blog-block .view-content .views-row a:hover {
         opacity: .6; }
@@ -369,7 +377,7 @@ article.blog {
   article.blog h2 {
     margin: 0;
     font-size: 19px;
-    font-weight: bold; }
+    font-weight: 600; }
     article.blog h2 a {
       color: #273748; }
       article.blog h2 a:hover {
@@ -380,7 +388,7 @@ article.blog {
     background: #fff; }
   article.blog .field--name-field-date {
     font-size: 19px;
-    font-weight: bold;
+    font-weight: 600;
     border-bottom: 3px solid #273748;
     padding-bottom: 1em;
     margin-bottom: 1em; }
@@ -393,7 +401,7 @@ article.pool.full,
   .view-taxonomy-term article.pool h2 {
     margin: 0;
     font-size: 19px;
-    font-weight: bold; }
+    font-weight: 600; }
     article.pool.full h2 a,
     .view-taxonomy-term article.pool h2 a {
       color: #273748; }
@@ -452,7 +460,7 @@ article.pool.full,
           color: #fff;
           display: block;
           border-bottom: 3px solid #fff;
-          font-weight: bold;
+          font-weight: 600;
           padding-bottom: 6px; }
           .view-pool .masonry-item article h2 a:hover {
             opacity: .6; }
@@ -490,7 +498,7 @@ article.pool.full,
       background: #273748;
       padding: 15px 15px 0;
       font-size: 26px;
-      font-weight: bold; }
+      font-weight: 600; }
       #block-views-block-front-blog article h2 a {
         color: #fff;
         display: block; }
@@ -545,7 +553,7 @@ article.pool.full,
       background: #273748;
       padding: 15px 15px 10px;
       font-size: 26px;
-      font-weight: bold; }
+      font-weight: 600; }
       #block-views-block-front-experts article h2 a {
         color: #fff;
         border-bottom: 3px solid #fff;
@@ -588,7 +596,7 @@ article.pool.full,
       margin: 0;
       padding: 15px 15px 10px;
       font-size: 26px;
-      font-weight: bold;
+      font-weight: 600;
       background: #273748; }
       #block-views-block-front-initiative article h2 a {
         color: #fff;

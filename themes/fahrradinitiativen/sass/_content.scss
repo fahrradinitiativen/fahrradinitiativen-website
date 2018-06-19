@@ -75,7 +75,7 @@ article.blog {
     h2 {
         margin: 0;
         font-size: 19px;
-        font-weight: bold;
+        font-weight: 600;
         a {
             color: $text;
             &:hover {
@@ -90,7 +90,7 @@ article.blog {
     }
     .field--name-field-date {
         font-size: 19px;
-        font-weight: bold;
+        font-weight: 600;
         border-bottom: 3px solid $text;
         padding-bottom: 1em;
         margin-bottom: 1em;
@@ -103,7 +103,7 @@ article.pool.full,
     h2 {
         margin: 0;
         font-size: 19px;
-        font-weight: bold;
+        font-weight: 600;
         a {
             color: $text;
         }
@@ -168,7 +168,7 @@ article.pool.full,
                     color: #fff;
                     display: block;
                     border-bottom: 3px solid #fff;
-                    font-weight: bold;
+                    font-weight: 600;
                     padding-bottom: 6px;
                     &:hover {
                         opacity: .6;
@@ -221,7 +221,7 @@ article.pool.full,
             background: $blue;
             padding: 15px 15px 0;
             font-size: 26px;
-            font-weight: bold;
+            font-weight: 600;
             a {
                 color: #fff;
                 display: block;
@@ -291,7 +291,7 @@ article.pool.full,
             background: $blue;
             padding: 15px 15px 10px;
             font-size: 26px;
-            font-weight: bold;
+            font-weight: 600;
             a {
                 color: #fff;
                 border-bottom: 3px solid #fff;
@@ -344,7 +344,7 @@ article.pool.full,
             margin: 0;
             padding: 15px 15px 10px;
             font-size: 26px;
-            font-weight: bold;
+            font-weight: 600;
             background: $blue;
             a {
                 color: #fff;

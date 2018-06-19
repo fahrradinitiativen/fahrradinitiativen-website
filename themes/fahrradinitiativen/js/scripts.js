@@ -9,6 +9,10 @@
                 $("body").toggleClass("scrolled", (fromTop > 150));
             });
             
+            var sticky = new Waypoint.Sticky({
+              element: $('#navbar')[0]
+            });
+
             var bigSlideAPI = ($('.mobile-menu-trigger').bigSlide({
                 side: 'right',
                 menuWidth: "290px",

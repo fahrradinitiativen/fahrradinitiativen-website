@@ -32,11 +32,16 @@
 }
 
 #navbar {
+    z-index: 1001;
+    width: 100%;
+    max-width: 100%;
     border: 0;
     @include border-radius(0);
-    border-bottom: 8px solid $blue;
     margin-bottom: 25px;
-    background: transparent;
+    background: $background;
+    .navbar-wrapper {
+        border-bottom: 8px solid $blue;
+    }
     .navbar-collapse {
         border: 0;
     }
@@ -46,7 +51,7 @@
             margin-right: 40px;
             a {
                 font-size: 20px;
-                font-weight: bold;
+                font-weight: 600;
                 background: transparent;
                 bottom: -8px;
                 position: relative;
@@ -108,4 +113,10 @@
             }
         }
     }
+}
+
+.stuck {
+    position:fixed;
+    top: 0;
+    
 }

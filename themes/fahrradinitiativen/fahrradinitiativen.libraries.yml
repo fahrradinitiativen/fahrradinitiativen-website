@@ -5,4 +5,6 @@ global-styling:
 global-scripts:
   js:
     js/bigSlide.js: {}
+    js/waypoints/lib/jquery.waypoints.js: {}
+    js/waypoints/lib/shortcuts/sticky.js: {}
     js/scripts.js: {}
