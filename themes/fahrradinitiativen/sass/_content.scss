@@ -363,7 +363,8 @@ article.pool.full,
                 margin: 0 auto;
             }
         }
-        .field--name-body {
+        .field--name-body,
+        .field--name-field-teaser {
             background: $blue;
             padding: 15px;
             color: #fff;

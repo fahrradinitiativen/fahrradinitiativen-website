@@ -199,6 +199,34 @@ h1, .h1 {
     font-size: 1em;
     margin: 0 0 .5em 0; }
 
+.to-top {
+  display: block;
+  opacity: 0;
+  width: 49px;
+  height: 25px;
+  background: url(../img/up.svg) no-repeat top left;
+  background-size: 49px;
+  position: fixed;
+  z-index: 111;
+  bottom: 30px;
+  right: 30px;
+  text-indent: -9999em; }
+  .scrolled .to-top {
+    opacity: .8; }
+    .scrolled .to-top:hover {
+      opacity: 1; }
+  @media (max-width: 767px) {
+    .to-top {
+      /* smaller sm */
+      background-color: #fff;
+      background-size: 25px;
+      background-position: 10px 10px;
+      padding: 10px;
+      width: 45px;
+      height: 33px;
+      -webkit-border-radius: 4px;
+      border-radius: 4px; } }
+
 @media only screen and (min-width: 768px) {
   aside.col-sm-3 {
     padding-left: 0; } }
@@ -612,7 +640,8 @@ article.pool.full,
       #block-views-block-front-initiative article .field--name-field-logo img {
         display: block;
         margin: 0 auto; }
-    #block-views-block-front-initiative article .field--name-body {
+    #block-views-block-front-initiative article .field--name-body,
+    #block-views-block-front-initiative article .field--name-field-teaser {
       background: #273748;
       padding: 15px;
       color: #fff; }

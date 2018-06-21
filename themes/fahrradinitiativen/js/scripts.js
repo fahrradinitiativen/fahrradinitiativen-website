@@ -33,6 +33,14 @@
               bigSlideAPI2.view.toggleClose();
             });
             
+            $(document).on('click', 'a.to-top', function(event){
+                event.preventDefault();
+
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+            
         }
     };
 

@@ -38,3 +38,33 @@
         margin: 0 0 .5em 0;
     }
 }
+
+.to-top {
+    display: block;
+    opacity: 0;
+    width: 49px;
+    height: 25px;
+    background: url(../img/up.svg) no-repeat top left;
+    background-size: 49px;
+    position: fixed;
+    z-index: 111;
+    bottom: 30px;
+    right: 30px;
+    text-indent: -9999em;
+    .scrolled & {
+        opacity: .8;
+        &:hover {
+            opacity: 1;
+        }
+    }
+    @media (max-width: 767px) { /* smaller sm */
+        background-color: #fff;
+        background-size: 25px;
+        background-position: 10px 10px;
+        padding: 10px;
+        width: 45px;
+        height: 33px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+    }
+}
