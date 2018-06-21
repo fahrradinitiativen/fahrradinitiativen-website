@@ -198,6 +198,21 @@ h1, .h1 {
   .footer h2 {
     font-size: 1em;
     margin: 0 0 .5em 0; }
+  .footer button.form-submit {
+    position: relative;
+    background: url(../img/arrow.png) no-repeat center left #273748;
+    background-size: 22px;
+    padding-left: 26px;
+    color: #fff;
+    text-indent: -9999em;
+    padding-left: 11px;
+    padding-right: 11px;
+    border: 1px solid #273748;
+    border-width: 1px 10px; }
+    .footer button.form-submit:hover {
+      background-image: url(../img/arrow-turquoise.png);
+      background-color: #009db1;
+      border-color: #009db1; }
 
 .to-top {
   display: block;

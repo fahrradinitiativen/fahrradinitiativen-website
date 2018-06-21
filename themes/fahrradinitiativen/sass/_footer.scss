@@ -37,6 +37,25 @@
         font-size: 1em;
         margin: 0 0 .5em 0;
     }
+    button {
+        &.form-submit {
+            position: relative;
+            background: url(../img/arrow.png) no-repeat center left $blue;
+            background-size: 22px;
+            padding-left: 26px;
+            color: #fff;
+            text-indent: -9999em;
+            padding-left: 11px;
+            padding-right: 11px;
+            border: 1px solid $blue;
+            border-width: 1px 10px;
+            &:hover {
+                background-image: url(../img/arrow-turquoise.png);
+                background-color: $turquoise;
+                border-color: $turquoise;
+            }
+        }
+    }
 }
 
 .to-top {
