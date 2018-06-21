@@ -492,7 +492,8 @@ class WebformElementHelper {
     // @see \Drupal\Core\Form\FormValidator::doValidateForm
     foreach ($element['#_element_validate'] as $callback) {
       $complete_form = &$form_state->getCompleteForm();
-      call_user_func_array($form_state->prepareCallback($callback), [&$element, &$form_state, &$complete_form]);
+      $arguments = [&$element, &$form_state, &$complete_form];
+      call_user_func_array($form_state->prepareCallback($callback), $arguments);
     }
   }
 
@@ -513,7 +514,8 @@ class WebformElementHelper {
     // @see \Drupal\Core\Form\FormValidator::doValidateForm
     foreach ($element['#_element_validate'] as $callback) {
       $complete_form = &$form_state->getCompleteForm();
-      call_user_func_array($form_state->prepareCallback($callback), [&$element, &$temp_form_state, &$complete_form]);
+      $arguments = [&$element, &$temp_form_state, &$complete_form];
+      call_user_func_array($form_state->prepareCallback($callback), $arguments);
     }
 
     // Get the temp webform state's values.
@@ -558,10 +560,10 @@ class WebformElementHelper {
     // Composite and multiple elements use use a custom states wrapper
     // which will changes '#states' to '#_webform_states'.
     // @see \Drupal\webform\Utility\WebformElementHelper::fixStatesWrapper
-    if (isset($element['#_webform_states'])) {
+    if (!empty($element['#_webform_states'])) {
       return $element['#_webform_states'];
     }
-    elseif (isset($element['#states'])) {
+    elseif (!empty($element['#states'])) {
       return $element['#states'];
     }
     else {

@@ -61,6 +61,13 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
   protected $roleStorage;
 
   /**
+   * Associative array container total results for all webforms.
+   *
+   * @var array
+   */
+  protected $resultsTotals;
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage) {
@@ -87,35 +94,31 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
 
     $build = [];
 
-    // Must manually add local actions to the webform because we can't alter local
-    // actions and add the needed dialog attributes.
-    // @see https://www.drupal.org/node/2585169
-    if (\Drupal::currentUser()->hasPermission('create webform')) {
-      $build['local_actions'] = [
-        'add_form' => [
-          '#type' => 'link',
-          '#title' => $this->t('Add webform'),
-          '#url' => new Url('entity.webform.add_form'),
-          '#attributes' => WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW, ['button', 'button-action', 'button--primary', 'button--small']),
-        ],
-      ];
-    }
-
     // Add the filter by key(word) and/or state.
     if (\Drupal::currentUser()->hasPermission('administer webform')) {
       $state_options = [
-        '' => $this->t('All [@total]', ['@total' => $this->getTotal(NULL, NULL)]),
-        WebformInterface::STATUS_OPEN => $this->t('Open [@total]', ['@total' => $this->getTotal(NULL, WebformInterface::STATUS_OPEN)]),
-        WebformInterface::STATUS_CLOSED => $this->t('Closed [@total]', ['@total' => $this->getTotal(NULL, WebformInterface::STATUS_CLOSED)]),
-        WebformInterface::STATUS_SCHEDULED => $this->t('Scheduled [@total]', ['@total' => $this->getTotal(NULL, WebformInterface::STATUS_SCHEDULED)]),
+        (string) $this->t('Active') => [
+          '' => $this->t('All [@total]', ['@total' => $this->getTotal(NULL, NULL)]),
+          WebformInterface::STATUS_OPEN => $this->t('Open [@total]', ['@total' => $this->getTotal(NULL, NULL, WebformInterface::STATUS_OPEN)]),
+          WebformInterface::STATUS_CLOSED => $this->t('Closed [@total]', ['@total' => $this->getTotal(NULL, NULL, WebformInterface::STATUS_CLOSED)]),
+          WebformInterface::STATUS_SCHEDULED => $this->t('Scheduled [@total]', ['@total' => $this->getTotal(NULL, NULL, WebformInterface::STATUS_SCHEDULED)]),
+        ],
+        (string) $this->t('Inactive') => [
+          WebformInterface::STATUS_ARCHIVED => $this->t('Archived [@total]', ['@total' => $this->getTotal(NULL, NULL, WebformInterface::STATUS_ARCHIVED)]),
+        ],
       ];
     }
     else {
       $state_options = [
-        '' => $this->t('All'),
-        WebformInterface::STATUS_OPEN => $this->t('Open'),
-        WebformInterface::STATUS_CLOSED => $this->t('Closed'),
-        WebformInterface::STATUS_SCHEDULED => $this->t('Scheduled'),
+        (string) $this->t('Active') => [
+          '' => $this->t('All'),
+          WebformInterface::STATUS_OPEN => $this->t('Open'),
+          WebformInterface::STATUS_CLOSED => $this->t('Closed'),
+          WebformInterface::STATUS_SCHEDULED => $this->t('Scheduled'),
+        ],
+        (string) $this->t('Inactive') => [
+          WebformInterface::STATUS_ARCHIVED => $this->t('Archived'),
+        ],
       ];
     }
     $build['filter_form'] = \Drupal::formBuilder()->getForm('\Drupal\webform\Form\WebformEntityFilterForm', $this->keys, $this->category, $this->state, $state_options);
@@ -145,34 +148,46 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
   public function buildHeader() {
     $header['title'] = [
       'data' => $this->t('Title'),
+      'specifier' => 'title',
+      'field' => 'title',
+      'sort' => 'asc',
     ];
     $header['description'] = [
       'data' => $this->t('Description'),
       'class' => [RESPONSIVE_PRIORITY_LOW],
+      'specifier' => 'description',
+      'field' => 'description',
     ];
     $header['category'] = [
       'data' => $this->t('Category'),
       'class' => [RESPONSIVE_PRIORITY_LOW],
+      'specifier' => 'category',
+      'field' => 'category',
     ];
     $header['status'] = [
       'data' => $this->t('Status'),
       'class' => [RESPONSIVE_PRIORITY_LOW],
+      'specifier' => 'status',
+      'field' => 'status',
     ];
     $header['author'] = [
       'data' => $this->t('Author'),
       'class' => [RESPONSIVE_PRIORITY_LOW],
+      'specifier' => 'uid',
+      'field' => 'uid',
     ];
     $header['results_total'] = [
       'data' => $this->t('Total Results'),
       'class' => [RESPONSIVE_PRIORITY_MEDIUM],
+      'specifier' => 'results_total',
+      'field' => 'results_total',
     ];
     $header['results_operations'] = [
       'data' => $this->t('Operations'),
       'class' => [RESPONSIVE_PRIORITY_MEDIUM],
     ];
-    $header['operations'] = [
-      'data' => '',
-    ];
+    $header['operations'] = '';
+
     return $header;
   }
 
@@ -181,7 +196,6 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\webform\WebformInterface */
-    $settings = $entity->getSettings();
 
     // ISSUE: Webforms that the current user can't access are not being hidden via the EntityQuery.
     // WORK-AROUND: Don't link to the webform.
@@ -193,21 +207,26 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
     }
     $row['description']['data'] = WebformHtmlEditor::checkMarkup($entity->get('description'));
     $row['category']['data']['#markup'] = $entity->get('category');
-    switch ($entity->get('status')) {
-      case WebformInterface::STATUS_OPEN:
-        $row['status'] = $this->t('Open');
-        break;
+    if ($entity->isArchived()) {
+      $row['status'] = $this->t('Archived');
+    }
+    else {
+      switch ($entity->get('status')) {
+        case WebformInterface::STATUS_OPEN:
+          $row['status'] = $this->t('Open');
+          break;
 
-      case WebformInterface::STATUS_CLOSED:
-        $row['status'] = $this->t('Closed');
-        break;
+        case WebformInterface::STATUS_CLOSED:
+          $row['status'] = $this->t('Closed');
+          break;
 
-      case WebformInterface::STATUS_SCHEDULED:
-        $row['status'] = $this->t('Scheduled (@state)', ['@state' => $entity->isOpen() ? $this->t('Open') : $this->t('Closed')]);
-        break;
+        case WebformInterface::STATUS_SCHEDULED:
+          $row['status'] = $this->t('Scheduled (@state)', ['@state' => $entity->isOpen() ? $this->t('Open') : $this->t('Closed')]);
+          break;
+      }
     }
     $row['owner'] = ($owner = $entity->getOwner()) ? $owner->toLink() : '';
-    $row['results_total'] = $this->submissionStorage->getTotal($entity) . (!empty($settings['results_disabled']) ? ' ' . $this->t('(Disabled)') : '');
+    $row['results_total'] = $this->getResultsTotal($entity->id()) . ($entity->isResultsDisabled() ? ' ' . $this->t('(Disabled)') : '');
     $row['results_operations']['data'] = [
       '#type' => 'operations',
       '#links' => $this->getDefaultOperations($entity, 'results'),
@@ -289,7 +308,6 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
       if (isset($operations['delete'])) {
         $operations['delete']['attributes'] = WebformDialogHelper::getModalDialogAttributes(WebformDialogHelper::DIALOG_NARROW);
       }
-
     }
     return $operations;
   }
@@ -298,10 +316,74 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
    * {@inheritdoc}
    */
   protected function getEntityIds() {
-    return $this->getQuery($this->keys, $this->category, $this->state)
-      ->sort('title')
-      ->pager($this->getLimit())
-      ->execute();
+    $header = $this->buildHeader();
+    if (\Drupal::request()->query->get('order') === (string) $header['results_total']['data']) {
+      // Get results totals for all returned entity ids.
+      $results_totals = $this->getQuery($this->keys, $this->category, $this->state)
+        ->execute();
+      foreach ($results_totals as $entity_id) {
+        $results_totals[$entity_id] = $this->getResultsTotal($entity_id);
+      }
+
+      // Sort results totals.
+      asort($results_totals, SORT_NUMERIC);
+      if (\Drupal::request()->query->get('sort') === 'desc') {
+        $results_totals = array_reverse($results_totals, TRUE);
+      }
+
+      // Build an associative array of entity ids.
+      $entity_ids = array_keys($results_totals);
+      $entity_ids = array_combine($entity_ids, $entity_ids);
+
+      // Manually initialize and apply paging to the entity ids.
+      $page = \Drupal::request()->query->get('page') ?: 0;
+      $total = count($entity_ids);
+      $limit = $this->getLimit();
+      $start = ($page * $limit);
+      pager_default_initialize($total, $limit);
+      return array_slice($entity_ids, $start, $limit, TRUE);
+    }
+    else {
+      $query = $this->getQuery($this->keys, $this->category, $this->state);
+      $query->tableSort($header);
+      $query->pager($this->getLimit());
+      return $query->execute();
+    }
+  }
+
+  /**
+   * Get total number of results for a webform.
+   *
+   * @param string $webform_id
+   *   A webform id.
+   *
+   * @return int
+   *   Total number of results for a webform.
+   */
+  protected function getResultsTotal($webform_id) {
+    $results_totals = $this->getResultsTotals();
+    return (isset($results_totals[$webform_id])) ? $results_totals[$webform_id] : 0;
+  }
+
+  /**
+   * Get total results for all webforms.
+   *
+   * @return array
+   *   An associative array keyed by webform id contains total results for
+   *   all webforms.
+   */
+  protected function getResultsTotals() {
+    if (isset($this->resultsTotals)) {
+      return $this->resultsTotals;
+    }
+
+    $query = \Drupal::database()->select('webform_submission', 'ws');
+    $query->fields('ws', ['webform_id']);
+    $query->addExpression('COUNT(sid)', 'results_total');
+    $query->groupBy('webform_id');
+
+    $this->resultsTotals = array_map('intval', $query->execute()->fetchAllKeyed());
+    return $this->resultsTotals;
   }
 
   /**
@@ -390,12 +472,19 @@ class WebformEntityListBuilder extends ConfigEntityListBuilder {
     }
 
     // Filter by (form) state.
-    if ($state) {
-      $query->condition('status', $state);
+    switch ($state) {
+      case WebformInterface::STATUS_OPEN;
+      case WebformInterface::STATUS_CLOSED;
+      case WebformInterface::STATUS_SCHEDULED;
+        $query->condition('status', $state);
+        break;
     }
 
+    // Always filter by archived state.
+    $query->condition('archive', $state === WebformInterface::STATUS_ARCHIVED ? 1 : 0);
+
     // Filter out templates if the webform_template.module is enabled.
-    if ($this->moduleHandler()->moduleExists('webform_templates')) {
+    if ($this->moduleHandler()->moduleExists('webform_templates') && $state !== WebformInterface::STATUS_ARCHIVED) {
       $query->condition('template', FALSE);
     }
     return $query;

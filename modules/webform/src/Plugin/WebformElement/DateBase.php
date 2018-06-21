@@ -4,6 +4,7 @@ namespace Drupal\webform\Plugin\WebformElement;
 
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Form\FormStateInterface;
@@ -43,7 +44,7 @@ abstract class DateBase extends WebformElementBase {
 
     // Must manually process #states.
     // @see drupal_process_states().
-    if (isset($element['#states'])) {
+    if (!empty($element['#states'])) {
       $element['#attached']['library'][] = 'core/drupal.states';
       $element['#wrapper_attributes']['data-drupal-states'] = Json::encode($element['#states']);
     }
@@ -67,13 +68,22 @@ abstract class DateBase extends WebformElementBase {
 
     $element['#element_validate'] = array_merge([[get_class($this), 'preValidateDate']], $element['#element_validate']);
     $element['#element_validate'][] = [get_class($this), 'validateDate'];
+
+    // Set first day according to admin/config/regional/settings.
+    $config = $this->configFactory->get('system.date');
+    $element['#attached']['drupalSettings']['webform']['dateFirstDay'] = $config->get('first_day');
+
+    $cacheability = CacheableMetadata::createFromObject($config);
+    $cacheability->applyTo($element);
+
+    $element['#attached']['library'][] = 'webform/webform.element.date';
   }
 
   /**
    * {@inheritdoc}
    */
   public function setDefaultValue(array &$element) {
-    if (isset($element['#multiple'])) {
+    if ($this->hasMultipleValues($element)) {
       $element['#default_value'] = (isset($element['#default_value'])) ? (array) $element['#default_value'] : NULL;
       return;
     }
@@ -129,6 +139,12 @@ abstract class DateBase extends WebformElementBase {
     foreach ($date_formats as $date_format) {
       $formats[$date_format->id()] = $date_format->label();
     }
+    // If a default format is defined update the fallback date formats label.
+    // @see \Drupal\webform\Plugin\WebformElementBase::getItemFormat
+    $default_format = $this->configFactory->get('webform.settings')->get('format.' . $this->getPluginId() . '.item');
+    if ($default_format && isset($formats[$default_format])) {
+      $formats['fallback'] = t('Default date format (@label)', ['@label' => $date_formats[$default_format]->label()]);
+    }
     return $formats;
   }
 
@@ -158,7 +174,7 @@ abstract class DateBase extends WebformElementBase {
     $form['default']['default_value']['#description'] .= '<br /><br />' . $this->t('Accepts any date in any <a href="https://www.gnu.org/software/tar/manual/html_chapter/tar_7.html#Date-input-formats">GNU Date Input Format</a>. Strings such as today, +2 months, and Dec 9 2004 are all valid.');
 
     // Append token date format to #default_value description.
-    $form['default']['default_value']['#description'] .= '<br /><br />' . $this->t("You may use tokens. Tokens should use the 'html_date' or 'html_datetime' date format. (i.e. @date_format)", ['@date_format' => '[webform-authenticated-user:field_date_of_birth:date:html_date]']);
+    $form['default']['default_value']['#description'] .= '<br /><br />' . $this->t("You may use tokens. Tokens should use the 'html_date' or 'html_datetime' date format. (i.e. @date_format)", ['@date_format' => '[current-user:field_date_of_birth:date:html_date]']);
 
     // Allow custom date formats to be entered.
     $form['display']['format']['#type'] = 'webform_select_other';
@@ -412,9 +428,70 @@ abstract class DateBase extends WebformElementBase {
    */
   public function getTestValues(array $element, WebformInterface $webform, array $options = []) {
     $format = DateFormat::load('html_datetime')->getPattern();
-    $min = !empty($element['#min']) ? strtotime($element['#min']) : strtotime('-10 years');
-    $max = !empty($element['#max']) ? strtotime($element['#max']) : max($min, strtotime('+20 years') ?: PHP_INT_MAX);
+    if (!empty($element['#date_year_range'])) {
+      list($min, $max) = static::datetimeRangeYears($element['#date_year_range']);
+    }
+    else {
+      $min = !empty($element['#min']) ? strtotime($element['#min']) : strtotime('-10 years');
+      $max = !empty($element['#max']) ? strtotime($element['#max']) : max($min, strtotime('+20 years') ?: PHP_INT_MAX);
+    }
     return date($format, rand($min, $max));
+  }
+
+  /**
+   * Specifies the start and end year to use as a date range.
+   *
+   * Copied from: DateElementBase::datetimeRangeYears.
+   *
+   * @param string $string
+   *   A min and max year string like '-3:+1' or '2000:2010' or '2000:+3'.
+   * @param object $date
+   *   (optional) A date object to test as a default value. Defaults to NULL.
+   *
+   * @return array
+   *   A numerically indexed array, containing the minimum and maximum year
+   *   described by this pattern.
+   *
+   * @see \Drupal\Core\Datetime\Element\DateElementBase::datetimeRangeYears
+   */
+  protected static function datetimeRangeYears($string, $date = NULL) {
+    $datetime = new DrupalDateTime();
+    $this_year = $datetime->format('Y');
+    list($min_year, $max_year) = explode(':', $string);
+
+    // Valid patterns would be -5:+5, 0:+1, 2008:2010.
+    $plus_pattern = '@[\+|\-][0-9]{1,4}@';
+    $year_pattern = '@^[0-9]{4}@';
+    if (!preg_match($year_pattern, $min_year, $matches)) {
+      if (preg_match($plus_pattern, $min_year, $matches)) {
+        $min_year = $this_year + $matches[0];
+      }
+      else {
+        $min_year = $this_year;
+      }
+    }
+    if (!preg_match($year_pattern, $max_year, $matches)) {
+      if (preg_match($plus_pattern, $max_year, $matches)) {
+        $max_year = $this_year + $matches[0];
+      }
+      else {
+        $max_year = $this_year;
+      }
+    }
+    // We expect the $min year to be less than the $max year. Some custom values
+    // for -99:+99 might not obey that.
+    if ($min_year > $max_year) {
+      $temp = $max_year;
+      $max_year = $min_year;
+      $min_year = $temp;
+    }
+    // If there is a current value, stretch the range to include it.
+    $value_year = $date instanceof DrupalDateTime ? $date->format('Y') : '';
+    if (!empty($value_year)) {
+      $min_year = min($value_year, $min_year);
+      $max_year = max($value_year, $max_year);
+    }
+    return [$min_year, $max_year];
   }
 
 }

@@ -85,11 +85,11 @@ class WebformBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     if ((count($args) > 2) && $args[0] == 'entity' && ($args[2] == 'webform' ||  $args[2] == 'webform_submission')) {
       $this->type = 'webform_source_entity';
     }
-    elseif ($route_name === 'webform.element_plugins.test') {
-      $this->type = 'webform_element_plugins';
+    elseif ($route_name === 'webform.reports_plugins.elements.test') {
+      $this->type = 'webform_plugins_elements';
     }
-    elseif (strpos($route_name, 'webform.about') === 0) {
-      $this->type = 'webform_about';
+    elseif (strpos($route_name, 'webform.contribute') === 0) {
+      $this->type = 'webform_contribute';
     }
     elseif (strpos($route_name, 'webform.help.') === 0) {
       $this->type = 'webform_help';
@@ -163,6 +163,13 @@ class WebformBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       $breadcrumb->addLink(Link::createFromRoute($this->t('Help'), 'help.main'));
       $breadcrumb->addLink(Link::createFromRoute($this->t('Webform'), 'help.page', ['name' => 'webform']));
     }
+    elseif ($this->type == 'webform_plugins_elements') {
+      $breadcrumb = new Breadcrumb();
+      $breadcrumb->addLink(Link::createFromRoute($this->t('Home'), '<front>'));
+      $breadcrumb->addLink(Link::createFromRoute($this->t('Administration'), 'system.admin'));
+      $breadcrumb->addLink(Link::createFromRoute($this->t('Reports'), 'system.admin_reports'));
+      $breadcrumb->addLink(Link::createFromRoute($this->t('Elements'), 'webform.reports_plugins.elements'));
+    }
     else {
       $breadcrumb = new Breadcrumb();
       $breadcrumb->addLink(Link::createFromRoute($this->t('Home'), '<front>'));
@@ -175,11 +182,14 @@ class WebformBreadcrumbBuilder implements BreadcrumbBuilderInterface {
           if (strpos($route_name, 'config_translation.item.') === 0 && $route_name != 'config_translation.item.overview.webform.config') {
             $breadcrumb->addLink(Link::createFromRoute($this->t('Translate'), 'config_translation.item.overview.webform.config'));
           }
-          break;
-
-        case 'webform_element_plugins':
-          $breadcrumb->addLink(Link::createFromRoute($this->t('Elements'), 'webform.element_plugins'));
-
+          elseif (strpos($route_name, 'entity.webform_options') === 0 && $route_name !== 'entity.webform_options.collection') {
+            $breadcrumb->addLink(Link::createFromRoute($this->t('Options'), 'entity.webform_options.collection'));
+          }
+          elseif (strpos($route_name, 'entity.webform_image_select_images') === 0 && $route_name !== 'entity.webform_image_select_imagess.collection') {
+            // @todo Refactor or move to webform_image_select.module.
+            // @see webform_image_select.module.
+            $breadcrumb->addLink(Link::createFromRoute($this->t('Images'), 'entity.webform_image_select_images.collection'));
+          }
           break;
 
         case 'webform_test':

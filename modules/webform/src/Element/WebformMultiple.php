@@ -6,6 +6,7 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Template\Attribute;
 use Drupal\webform\Utility\WebformElementHelper;
 
 /**
@@ -28,8 +29,6 @@ class WebformMultiple extends FormElement {
     return [
       '#input' => TRUE,
       '#access' => TRUE,
-      '#label' => t('item'),
-      '#labels' => t('items'),
       '#key' => NULL,
       '#header' => NULL,
       '#element' => [
@@ -39,15 +38,23 @@ class WebformMultiple extends FormElement {
         '#placeholder' => t('Enter value'),
       ],
       '#cardinality' => FALSE,
-      '#min_items' => 1,
+      '#min_items' => NULL,
+      '#no_items_message' => $this->t('No items entered. Please add items below.'),
       '#empty_items' => 1,
       '#add_more' => 1,
+      '#add_more_button_label' => $this->t('Add'),
+      '#add_more_input_label' => $this->t('more items'),
       '#sorting' => TRUE,
       '#operations' => TRUE,
+      '#add' => TRUE,
+      '#remove' => TRUE,
       '#process' => [
         [$class, 'processWebformMultiple'],
       ],
       '#theme_wrappers' => ['form_element'],
+      // Add '#markup' property to add an 'id' attribute to the form element.
+      // @see template_preprocess_form_element()
+      '#markup' => '',
     ];
   }
 
@@ -81,18 +88,19 @@ class WebformMultiple extends FormElement {
     // Set tree.
     $element['#tree'] = TRUE;
 
+    // Set min items based on when the element is required.
+    if (!isset($element['#min_items']) || $element['#min_items'] === '') {
+      $element['#min_items'] = (empty($element['#required'])) ? 0 : 1;
+    }
+
     // Disable operation when #cardinality is set.
     if (!empty($element['#cardinality'])) {
       $element['#operations'] = FALSE;
     }
 
     // Add validate callback that extracts the array of items.
-    if (isset($element['#element_validate'])) {
-      $element['#element_validate'] = array_merge([[get_called_class(), 'validateWebformMultiple']], $element['#element_validate']);
-    }
-    else {
-      $element['#element_validate'] = [[get_called_class(), 'validateWebformMultiple']];
-    }
+    $element += ['#element_validate' => []];
+    array_unshift($element['#element_validate'], [get_called_class(), 'validateWebformMultiple']);
 
     // Wrap this $element in a <div> that handle #states.
     WebformElementHelper::fixStatesWrapper($element);
@@ -120,9 +128,6 @@ class WebformMultiple extends FormElement {
         $min_items = (int) $element['#min_items'];
         $number_of_items = ($number_of_items < $min_items) ? $min_items : $number_of_items;
 
-        if ($number_of_items < 1) {
-          $number_of_items = 1;
-        }
         $form_state->set($number_of_items_storage_key, $number_of_items);
       }
 
@@ -140,7 +145,7 @@ class WebformMultiple extends FormElement {
     ];
 
     // Initialize, prepare, and finalize sub-elements.
-    static::initializeElement($element);
+    static::initializeElement($element, $form_state, $complete_form);
 
     // Build (single) element header.
     $header = static::buildElementHeader($element);
@@ -160,6 +165,13 @@ class WebformMultiple extends FormElement {
       $default_values = [];
     }
 
+    // When adding/removing elements we don't need to set any default values.
+    $action_key = static::getStorageKey($element, 'action');
+    if ($form_state->get($action_key)) {
+      $form_state->set($action_key, FALSE);
+      $default_values = [];
+    }
+
     foreach ($default_values as $key => $default_value) {
       // If #key is defined make sure to set default value's key item.
       if (!empty($element['#key']) && !isset($default_value[$element['#key']])) {
@@ -175,21 +187,39 @@ class WebformMultiple extends FormElement {
     }
 
     // Build table.
+    $attributes = ['id' => $table_id, 'class' => ['webform-multiple-table']];
+    if (count($element['#element']) > 1) {
+      $attributes['class'][] = 'webform-multiple-table-responsive';
+    }
     $element['items'] = [
-      '#prefix' => '<div id="' . $table_id . '" class="webform-multiple-table">',
+      '#prefix' => '<div' . new Attribute($attributes) . '>',
       '#suffix' => '</div>',
-      '#type' => 'table',
-      '#header' => $header,
     ] + $rows;
 
-    // Add sorting to table.
-    if ($element['#sorting']) {
-      $element['items']['#tabledrag'] = [
-        [
-          'action' => 'order',
-          'relationship' => 'sibling',
-          'group' => 'webform-multiple-sort-weight',
-        ],
+    // Display table if there are any rows.
+    if ($rows) {
+      $element['items'] += [
+        '#type' => 'table',
+        '#header' => $header,
+      ] + $rows;
+
+      // Add sorting to table.
+      if ($element['#sorting']) {
+        $element['items']['#tabledrag'] = [
+          [
+            'action' => 'order',
+            'relationship' => 'sibling',
+            'group' => 'webform-multiple-sort-weight',
+          ],
+        ];
+      }
+    }
+    elseif (!empty($element['#no_items_message'])) {
+      $element['items'] += [
+        '#type' => 'webform_message',
+        '#message_message' => $element['#no_items_message'],
+        '#message_type' => 'info',
+        '#attributes' => ['class' => ['webform-multiple-table--no-items-message']],
       ];
     }
 
@@ -201,7 +231,7 @@ class WebformMultiple extends FormElement {
       ];
       $element['add']['submit'] = [
         '#type' => 'submit',
-        '#value' => t('Add'),
+        '#value' => $element['#add_more_button_label'],
         '#limit_validation_errors' => [],
         '#submit' => [[get_called_class(), 'addItemsSubmit']],
         '#ajax' => $ajax_settings,
@@ -212,7 +242,7 @@ class WebformMultiple extends FormElement {
         '#min' => 1,
         '#max' => 100,
         '#default_value' => $element['#add_more'],
-        '#field_suffix' => t('more @labels', ['@labels' => $element['#labels']]),
+        '#field_suffix' => $element['#add_more_input_label'],
         '#error_no_message' => TRUE,
       ];
     }
@@ -227,8 +257,12 @@ class WebformMultiple extends FormElement {
    *
    * @param array $element
    *   The element.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   * @param array $complete_form
+   *   An associative array containing the structure of the form.
    */
-  protected static function initializeElement(array &$element) {
+  protected static function initializeElement(array &$element, FormStateInterface $form_state, array &$complete_form) {
     // Track element child keys.
     $element['#child_keys'] = Element::children($element['#element']);
 
@@ -247,22 +281,26 @@ class WebformMultiple extends FormElement {
       // Initialize, prepare, and finalize composite sub-elements.
       // Get composite element required/options states from visible/hidden states.
       $required_states = WebformElementHelper::getRequiredFromVisibleStates($element);
-      static::initializeElementRecursive($element, $element['#element'], $required_states);
+      static::initializeElementRecursive($element, $form_state, $complete_form, $element['#element'], $required_states);
     }
   }
 
   /**
-   * Initialize, prepare, and finalize composite sub-elements recusively.
+   * Initialize, prepare, and finalize composite sub-elements recursively.
    *
    * @param array $element
    *   The main element.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   * @param array $complete_form
+   *    An associative array containing the structure of the form.
    * @param array $sub_elements
    *   The sub element.
    * @param array $required_states
    *   An associative array of required states froim the main element's
    *   visible/hidden states.
    */
-  protected static function initializeElementRecursive(array $element, array &$sub_elements, array $required_states) {
+  protected static function initializeElementRecursive(array $element, FormStateInterface $form_state, array &$complete_form, array &$sub_elements, array $required_states) {
     $child_keys = Element::children($sub_elements);
 
     // Exit immediate if the sub elements has no children.
@@ -270,26 +308,33 @@ class WebformMultiple extends FormElement {
       return;
     }
 
+    // Determine if the sub elements are the main element for each table cell.
+    $is_root = ($element['#element'] === $sub_elements) ? TRUE : FALSE;
+
     /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
     $element_manager = \Drupal::service('plugin.manager.webform.element');
     foreach ($child_keys as $child_key) {
       $sub_element =& $sub_elements[$child_key];
+
+      $element_plugin = $element_manager->getElementInstance($sub_element);
 
       // If the element's #access is FALSE, apply it to all sub elements.
       if (isset($element['#access']) && $element['#access'] === FALSE) {
         $sub_element['#access'] = FALSE;
       }
 
-      // If #header then hide the sub element's #title.
-      if ($element['#header'] && !isset($sub_element['#title_display'])) {
+      // If #header and root input then hide the sub element's #title.
+      if ($element['#header']
+        && ($is_root && $element_plugin->isInput($sub_element))
+        && !isset($sub_element['#title_display'])) {
         $sub_element['#title_display'] = 'invisible';
       }
 
-      // Initialize, prepare, and populate composite sub-element.
-      $element_plugin = $element_manager->getElementInstance($sub_element);
-      $element_plugin->initialize($sub_element);
-      $element_plugin->prepare($sub_element);
-      $element_plugin->finalize($sub_element);
+      // Initialize the composite sub-element.
+      $element_manager->initializeElement($sub_element);
+
+      // Build the composite sub-element.
+      $element_manager->buildElement($sub_element, $complete_form, $form_state);
 
       // Custom validate required sub-element because they can be hidden
       // via #access or #states.
@@ -304,7 +349,7 @@ class WebformMultiple extends FormElement {
       }
 
       if (is_array($sub_element)) {
-        static::initializeElementRecursive($element, $sub_element, $required_states);
+        static::initializeElementRecursive($element, $form_state, $complete_form, $sub_element, $required_states);
       }
     }
   }
@@ -480,7 +525,13 @@ class WebformMultiple extends FormElement {
           // Convert element to rendered hidden element.
           if (!isset($element['#access']) || $element['#access'] !== FALSE) {
             $hidden_elements[$child_key]['#type'] = 'hidden';
-            unset($hidden_elements[$child_key]['#access']);
+            // Unset #access, #element_validate, and #pre_render.
+            // @see \Drupal\webform\Plugin\WebformElementBase::prepare().
+            unset(
+              $hidden_elements[$child_key]['#access'],
+              $hidden_elements[$child_key]['#element_validate'],
+              $hidden_elements[$child_key]['#pre_render']
+            );
           }
           static::setElementRowParentsRecursive($hidden_elements[$child_key], $child_key, $hidden_parents);
         }
@@ -517,32 +568,39 @@ class WebformMultiple extends FormElement {
           'class' => ['webform-multiple-table--operations'],
         ],
       ];
-      $row['_operations_']['add'] = [
-        '#type' => 'image_button',
-        '#title' => t('Add'),
-        '#src' => drupal_get_path('module', 'webform') . '/images/icons/plus.svg',
-        '#limit_validation_errors' => [],
-        '#submit' => [[get_called_class(), 'addItemSubmit']],
-        '#ajax' => $ajax_settings,
-        // Issue #1342066 Document that buttons with the same #value need a unique
-        // #name for the Form API to distinguish them, or change the Form API to
-        // assign unique #names automatically.
-        '#row_index' => $row_index,
-        '#name' => $table_id . '_add_' . $row_index,
-      ];
-      $row['_operations_']['remove'] = [
-        '#type' => 'image_button',
-        '#title' => t('Remove'),
-        '#src' => drupal_get_path('module', 'webform') . '/images/icons/ex.svg',
-        '#limit_validation_errors' => [],
-        '#submit' => [[get_called_class(), 'removeItemSubmit']],
-        '#ajax' => $ajax_settings,
-        // Issue #1342066 Document that buttons with the same #value need a unique
-        // #name for the Form API to distinguish them, or change the Form API to
-        // assign unique #names automatically.
-        '#row_index' => $row_index,
-        '#name' => $table_id . '_remove_' . $row_index,
-      ];
+      if ($element['#add'] && $element['#remove']) {
+        $row['_operations_']['#wrapper_attributes']['class'][] = 'webform-multiple-table--operations-two';
+      }
+      if ($element['#add']) {
+        $row['_operations_']['add'] = [
+          '#type' => 'image_button',
+          '#title' => t('Add'),
+          '#src' => drupal_get_path('module', 'webform') . '/images/icons/plus.svg',
+          '#limit_validation_errors' => [],
+          '#submit' => [[get_called_class(), 'addItemSubmit']],
+          '#ajax' => $ajax_settings,
+          // Issue #1342066 Document that buttons with the same #value need a unique
+          // #name for the Form API to distinguish them, or change the Form API to
+          // assign unique #names automatically.
+          '#row_index' => $row_index,
+          '#name' => $table_id . '_add_' . $row_index,
+        ];
+      }
+      if ($element['#remove']) {
+        $row['_operations_']['remove'] = [
+          '#type' => 'image_button',
+          '#title' => t('Remove'),
+          '#src' => drupal_get_path('module', 'webform') . '/images/icons/ex.svg',
+          '#limit_validation_errors' => [],
+          '#submit' => [[get_called_class(), 'removeItemSubmit']],
+          '#ajax' => $ajax_settings,
+          // Issue #1342066 Document that buttons with the same #value need a unique
+          // #name for the Form API to distinguish them, or change the Form API to
+          // assign unique #names automatically.
+          '#row_index' => $row_index,
+          '#name' => $table_id . '_remove_' . $row_index,
+        ];
+      }
     }
 
     // Add hidden element as a hidden row.
@@ -665,9 +723,13 @@ class WebformMultiple extends FormElement {
     $form_state->set($number_of_items_storage_key, $number_of_items + $more_items);
 
     // Reset values.
-    $element['items']['#value'] = array_values($element['items']['#value']);
-    $form_state->setValueForElement($element['items'], $element['items']['#value']);
-    NestedArray::setValue($form_state->getUserInput(), $element['items']['#parents'], $element['items']['#value']);
+    $items = (!empty($element['items']['#value'])) ? array_values($element['items']['#value']) : [];
+    $element['items']['#value'] = $items;
+    $form_state->setValueForElement($element['items'], $items);
+    NestedArray::setValue($form_state->getUserInput(), $element['items']['#parents'], $items);
+
+    $action_key = static::getStorageKey($element, 'action');
+    $form_state->set($action_key, TRUE);
 
     // Rebuild the webform.
     $form_state->setRebuild();
@@ -690,7 +752,7 @@ class WebformMultiple extends FormElement {
     foreach ($element['items']['#value'] as $row_index => $value) {
       $values[] = $value;
       if ($row_index == $button['#row_index']) {
-        $values[] = ['item' => '', 'text' => ''];
+        $values[] = [];
       }
     }
 
@@ -702,6 +764,9 @@ class WebformMultiple extends FormElement {
     // Reset values.
     $form_state->setValueForElement($element['items'], $values);
     NestedArray::setValue($form_state->getUserInput(), $element['items']['#parents'], $values);
+
+    $action_key = static::getStorageKey($element, 'action');
+    $form_state->set($action_key, TRUE);
 
     // Rebuild the webform.
     $form_state->setRebuild();
@@ -727,14 +792,17 @@ class WebformMultiple extends FormElement {
     // Remove one item from the 'number of items'.
     $number_of_items_storage_key = static::getStorageKey($element, 'number_of_items');
     $number_of_items = $form_state->get($number_of_items_storage_key);
-    // Never allow the number of items to be less than 1.
-    if ($number_of_items != 1) {
+    // Never allow the number of items to be less than #min_items.
+    if ($number_of_items > $element['#min_items']) {
       $form_state->set($number_of_items_storage_key, $number_of_items - 1);
     }
 
     // Reset values.
     $form_state->setValueForElement($element['items'], $values);
     NestedArray::setValue($form_state->getUserInput(), $element['items']['#parents'], $values);
+
+    $action_key = static::getStorageKey($element, 'action');
+    $form_state->set($action_key, TRUE);
 
     // Rebuild the webform.
     $form_state->setRebuild();
@@ -760,20 +828,30 @@ class WebformMultiple extends FormElement {
     // @see \Drupal\webform\Element\WebformOtherBase::validateWebformOther
     $values = NestedArray::getValue($form_state->getValues(), $element['#parents']);
 
-    // Validate unique keys.
-    if ($error_message = static::validateUniqueKeys($element, $values['items'])) {
-      $form_state->setError($element, $error_message);
-      return;
+    $number_of_items_storage_key = static::getStorageKey($element, 'number_of_items');
+    $number_of_items = $form_state->get($number_of_items_storage_key);
+    if ($number_of_items || $element['#cardinality']) {
+      $items = $values['items'];
+
+      // Validate unique keys.
+      if ($error_message = static::validateUniqueKeys($element, $items)) {
+        $form_state->setError($element, $error_message);
+        return;
+      }
+
+      // Convert values to items and validate duplicate keys.
+      $items = static::convertValuesToItems($element, $items);
+
+      // Validate required items.
+      if (!empty($element['#required']) && empty($items)) {
+        WebformElementHelper::setRequiredError($element, $form_state);
+      }
+    }
+    else {
+      $items = [];
     }
 
-    // Convert values to items and validate duplicate keys.
-    $items = static::convertValuesToItems($element, $values['items']);
-
-    // Validate required items.
-    if (!empty($element['#required']) && empty($items)) {
-      WebformElementHelper::setRequiredError($element, $form_state);
-    }
-
+    $element['#value'] = $items;
     $form_state->setValueForElement($element, $items);
   }
 

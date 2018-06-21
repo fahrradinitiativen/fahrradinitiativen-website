@@ -8,6 +8,7 @@ open: null
 close: null
 uid: null
 template: false
+archive: false
 id: test_form_preview
 title: 'Test: Webform: Preview'
 description: 'Test submission preview.'
@@ -19,6 +20,9 @@ elements: |
   email:
     '#type': email
     '#title': Email
+  checkbox:
+      '#type': checkbox
+      '#title': Checkbox
 css: ''
 javascript: ''
 settings:
@@ -42,6 +46,7 @@ settings:
   form_reset: false
   form_disable_autocomplete: false
   form_novalidate: false
+  form_disable_inline_errors: false
   form_required: false
   form_unsaved: false
   form_disable_back: false
@@ -53,10 +58,13 @@ settings:
   submission_label: ''
   submission_log: false
   submission_user_columns: {  }
+  submission_user_duplicate: false
   submission_login: false
   submission_login_message: ''
   submission_exception_message: ''
   submission_locked_message: ''
+  previous_submission_message: ''
+  previous_submissions_message: ''
   autofill: false
   autofill_message: ''
   autofill_excluded_elements: {  }
@@ -74,6 +82,7 @@ settings:
   preview_attributes: {  }
   preview_excluded_elements: {  }
   preview_exclude_empty: true
+  preview_exclude_empty_checkbox: true
   draft: none
   draft_multiple: false
   draft_auto_save: false
@@ -87,6 +96,8 @@ settings:
   confirmation_back: true
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -141,7 +152,7 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-  administer:
+  test:
     roles: {  }
     users: {  }
     permissions: {  }

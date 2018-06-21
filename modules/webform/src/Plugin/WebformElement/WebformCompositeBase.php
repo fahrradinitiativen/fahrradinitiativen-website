@@ -64,6 +64,7 @@ abstract class WebformCompositeBase extends WebformElementBase {
       'flexbox' => '',
       // Attributes.
       'wrapper_attributes' => [],
+      'label_attributes' => [],
       // Submission display.
       'format' => $this->getItemDefaultFormat(),
       'format_html' => '',
@@ -761,6 +762,7 @@ abstract class WebformCompositeBase extends WebformElementBase {
     $generate = \Drupal::service('webform_submission.generate');
 
     $composite_elements = $this->getInitializedCompositeElement($element);
+    $composite_elements = WebformElementHelper::getFlattened($composite_elements);
 
     $values = [];
     for ($i = 1; $i <= 3; $i++) {

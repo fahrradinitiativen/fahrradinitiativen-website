@@ -90,9 +90,9 @@ class WebformDialogHelper {
       'data-dialog-type' => 'modal',
       'data-dialog-options' => Json::encode([
         'width' => $width,
-        // .webform-modal is used to set the dialog's top position.
+        // .webform-ui-dialog is used to set the dialog's top position.
         // @see modules/sandbox/webform/css/webform.ajax.css
-        'dialogClass' => 'webform-modal',
+        'dialogClass' => 'webform-ui-dialog',
       ]),
     ];
   }
@@ -120,7 +120,7 @@ class WebformDialogHelper {
     $dialog_widths = [
       static::DIALOG_WIDE => 800,
       static::DIALOG_NORMAL => 600,
-      static::DIALOG_NARROW => 500,
+      static::DIALOG_NARROW => 550,
     ];
     $width = (isset($dialog_widths[$width])) ? $dialog_widths[$width] : $width;
 

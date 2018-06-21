@@ -3,7 +3,6 @@
 namespace Drupal\Tests\webform\Kernel;
 
 use Drupal\Core\Url;
-use Drupal\webform\WebformEntityElementsValidator;
 use Drupal\KernelTests\KernelTestBase;
 
 /**
@@ -190,7 +189,7 @@ duplicate:
       ];
 
       /** @var \Drupal\webform\WebformInterface $webform */
-      $webform = $this->getMock('\Drupal\webform\WebformInterface');
+      $webform = $this->createMock('\Drupal\webform\WebformInterface');
       $methods = $test;
       unset($methods['messages']);
       foreach ($methods as $method => $returnValue) {

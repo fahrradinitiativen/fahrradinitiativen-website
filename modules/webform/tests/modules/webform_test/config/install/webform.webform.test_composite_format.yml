@@ -8,6 +8,7 @@ open: null
 close: null
 uid: null
 template: false
+archive: false
 id: test_composite_format
 title: 'Test: Composite: Format composite'
 description: 'Test composite element formatting.'
@@ -126,7 +127,7 @@ elements: |
           address_2: '10 Main Street'
           city: Springfield
           state_province: Alabama
-          postal_code: Loremipsum
+          postal_code: '11111'
           country: Afghanistan
         '#format': value
       webform_address_raw:
@@ -137,7 +138,7 @@ elements: |
           address_2: '10 Main Street'
           city: Springfield
           state_province: Alabama
-          postal_code: Loremipsum
+          postal_code: '11111'
           country: Afghanistan
         '#format': raw
       webform_address_list:
@@ -148,7 +149,7 @@ elements: |
           address_2: '10 Main Street'
           city: Springfield
           state_province: Alabama
-          postal_code: Loremipsum
+          postal_code: '11111'
           country: Afghanistan
         '#format': list
     webform_contact:
@@ -166,7 +167,7 @@ elements: |
           address_2: '10 Main Street'
           city: Springfield
           state_province: Alabama
-          postal_code: Loremipsum
+          postal_code: '11111'
           country: Afghanistan
         '#format': value
       webform_contact_raw:
@@ -181,7 +182,7 @@ elements: |
           address_2: '10 Main Street'
           city: Springfield
           state_province: Alabama
-          postal_code: Loremipsum
+          postal_code: '11111'
           country: Afghanistan
         '#format': raw
       webform_contact_list:
@@ -196,50 +197,8 @@ elements: |
           address_2: '10 Main Street'
           city: Springfield
           state_province: Alabama
-          postal_code: Loremipsum
+          postal_code: '11111'
           country: Afghanistan
-        '#format': list
-    webform_creditcard:
-      '#type': details
-      '#title': 'Credit card'
-      webform_creditcard_value:
-        '#type': webform_creditcard
-        '#title': 'Credit card (Value)'
-        '#default_value':
-          warning: null
-          name: Loremipsum
-          type: VI
-          number: '4111111111111111'
-          civ: 111
-          expiration: null
-          expiration_month: 1
-          expiration_year: 2017
-        '#format': value
-      webform_creditcard_raw:
-        '#type': webform_creditcard
-        '#title': 'Credit card (Raw value)'
-        '#default_value':
-          warning: null
-          name: Loremipsum
-          type: VI
-          number: '4111111111111111'
-          civ: 111
-          expiration: null
-          expiration_month: 1
-          expiration_year: 2017
-        '#format': raw
-      webform_creditcard_list:
-        '#type': webform_creditcard
-        '#title': 'Credit card (List)'
-        '#default_value':
-          warning: null
-          name: Loremipsum
-          type: VI
-          number: '4111111111111111'
-          civ: 111
-          expiration: null
-          expiration_month: 1
-          expiration_year: 2017
         '#format': list
     webform_link:
       '#type': details
@@ -457,6 +416,7 @@ settings:
   form_reset: false
   form_disable_autocomplete: false
   form_novalidate: false
+  form_disable_inline_errors: false
   form_required: false
   form_unsaved: false
   form_disable_back: false
@@ -468,10 +428,13 @@ settings:
   submission_label: ''
   submission_log: false
   submission_user_columns: {  }
+  submission_user_duplicate: false
   submission_login: false
   submission_login_message: ''
   submission_exception_message: ''
   submission_locked_message: ''
+  previous_submission_message: ''
+  previous_submissions_message: ''
   autofill: false
   autofill_message: ''
   autofill_excluded_elements: {  }
@@ -489,6 +452,7 @@ settings:
   preview_attributes: {  }
   preview_excluded_elements: {  }
   preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
   draft: none
   draft_multiple: false
   draft_auto_save: false
@@ -502,6 +466,8 @@ settings:
   confirmation_back: true
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -556,7 +522,7 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-  administer:
+  test:
     roles: {  }
     users: {  }
     permissions: {  }
@@ -585,6 +551,7 @@ handlers:
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
+      exclude_empty_checkbox: false
       html: false
       attachments: false
       twig: false
@@ -617,6 +584,7 @@ handlers:
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
+      exclude_empty_checkbox: false
       html: true
       attachments: false
       twig: false

@@ -91,13 +91,28 @@ entity.node.webform.user.submission.delete:
   requirements:
     _custom_access: '\Drupal\webform_node\Access\WebformNodeAccess::checkWebformSubmissionAccess'
 
+entity.node.webform.user.submission.duplicate:
+  path: '/node/{node}/webform/submissions/{webform_submission}/duplicate'
+  defaults:
+    _entity_form: 'webform_submission.duplicate'
+    _title_callback: '\Drupal\webform\Controller\WebformSubmissionViewController::title'
+    duplicate: TRUE
+    operation: webform_submission_duplicate
+    entity_access: 'webform_submission.update'
+  options:
+    parameters:
+      node:
+        type: 'entity:node'
+  requirements:
+    _custom_access: '\Drupal\webform_node\Access\WebformNodeAccess::checkWebformSubmissionAccess'
+
 entity.node.webform.test_form:
   path: '/node/{node}/webform/test'
   defaults:
     _controller: '\Drupal\webform\Controller\WebformTestController::testForm'
     _title_callback: '\Drupal\Core\Entity\Controller\EntityController::title'
     operation: webform_submission_view
-    entity_access: 'webform.update'
+    entity_access: 'webform.test'
   options:
     parameters:
       node:

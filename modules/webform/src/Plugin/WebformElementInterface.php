@@ -3,6 +3,7 @@
 namespace Drupal\webform\Plugin;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -48,10 +49,24 @@ interface WebformElementInterface extends PluginInspectionInterface, PluginFormI
    *   An element's property name.
    *
    * @return mixed
-   *   An element's default property value or NULL is default property does not
+   *   An element's default property value or NULL if default property does not
    *   exist.
    */
   public function getDefaultProperty($property_name);
+
+  /**
+   * Get an element's property value.
+   *
+   * @param array $element
+   *   An element.
+   * @param string $property_name
+   *   An element's property name.
+   *
+   * @return mixed
+   *   An element's property value, default value, or NULL if
+   *   property does not exist.
+   */
+  public function getElementProperty(array $element, $property_name);
 
   /**
    * Determine if the element supports a specified property.
@@ -315,6 +330,16 @@ interface WebformElementInterface extends PluginInspectionInterface, PluginFormI
    * @see \Drupal\webform\Entity\Webform::checkAccessRules
    */
   public function checkAccessRules($operation, array $element, AccountInterface $account = NULL);
+
+  /**
+   * Replace tokens for all element properties.
+   *
+   * @param array $element
+   *   An element.
+   * @param \Drupal\Core\Entity\EntityInterface|null$entity
+   *   A webform or webform submission entity.
+   */
+  public function replaceTokens(array &$element, EntityInterface $entity = NULL);
 
   /**
    * Display element disabled warning.

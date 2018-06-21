@@ -19,6 +19,7 @@ use Drupal\webform\Plugin\WebformHandler\RemotePostWebformHandler;
 use Drupal\webform\Utility\WebformArrayHelper;
 use Drupal\webform\Utility\WebformOptionsHelper;
 use Drupal\webform\Utility\WebformReflectionHelper;
+use Drupal\webform\Utility\WebformYaml;
 
 /******************************************************************************/
 // Webform-8.x-5.0-beta1 - December 7, 2016 (No update required).
@@ -61,23 +62,7 @@ function webform_update_8001() {
  * Issue #2834572: Refactor and improve token management.
  */
 function webform_update_8002() {
-  $config_factory = \Drupal::configFactory();
-
-  // Update 'webform.settings' configuration.
-  $settings_config = \Drupal::configFactory()->getEditable('webform.settings');
-  $yaml = Yaml::encode($settings_config->getRawData());
-  $yaml = str_replace('[webform_submission:', '[webform_submission:', $yaml);
-  $settings_config->setData(Yaml::decode($yaml));
-  $settings_config->save();
-
-  // Update 'webform.webform.*' configuration.
-  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
-    $webform_config = $config_factory->getEditable($webform_config_name);
-    $yaml = Yaml::encode($webform_config->getRawData());
-    $yaml = str_replace('[webform_submission:', '[webform_submission:', $yaml);
-    $webform_config->setData(Yaml::decode($yaml));
-    $webform_config->save();
-  }
+  _webform_update_string_replace('[webform-submission:', '[webform_submission:');
 }
 
 /**
@@ -243,6 +228,9 @@ function webform_update_8011() {
  *   A form element.
  */
 function _webform_update_8011(array &$element) {
+  // Issue #2863986: Allow updating modules with new service dependencies.
+  \Drupal::service('kernel')->rebuildContainer();
+
   if (isset($element['#format'])) {
     /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
     $element_manager = \Drupal::service('plugin.manager.webform.element');
@@ -312,6 +300,9 @@ function webform_update_8014() {
  *   A form element.
  */
 function _webform_update_8014(array &$element) {
+  // Issue #2863986: Allow updating modules with new service dependencies.
+  \Drupal::service('kernel')->rebuildContainer();
+
   /** @var \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager */
   $element_manager = \Drupal::service('plugin.manager.webform.element');
 
@@ -489,6 +480,9 @@ function webform_update_8024() {
  * Issue #2857417: Add support for open and close date/time to Webform nodes. Update database scheme.
  */
 function webform_update_8025() {
+  // Issue #2863986: Allow updating modules with new service dependencies.
+  \Drupal::service('kernel')->rebuildContainer();
+
   /** @var \Drupal\webform\WebformEntityReferenceManagerInterface $entity_reference_manager */
   $entity_reference_manager = \Drupal::service('webform.entity_reference_manager');
 
@@ -627,7 +621,7 @@ function webform_update_8030() {
  * Issue #2854021: Send email based on element options selection.
  */
 function webform_update_8031() {
-  _webform_update_webform_handler_configuration(EmailWebformHandler::class);
+  _webform_update_webform_handler_settings();
 }
 
 /**
@@ -1582,17 +1576,17 @@ function webform_update_8077() {
  */
 function webform_update_8078() {
   _webform_update_admin_settings();
-  _webform_update_webform_handler_configuration(EmailWebformHandler::class);
+  _webform_update_webform_handler_settings();
 }
 
 /**
  * Issue #2911329: Create 'About' tab.
  */
 function webform_update_8079() {
-  // Convert ui.help_menu_disabled to ui.about_disabled.
+  // Convert ui.help_menu_disabled to ui.contribute_disabled.
   $admin_config = \Drupal::configFactory()->getEditable('webform.settings');
   $help_menu_disabled = $admin_config->get('ui.help_menu_disabled') ?: FALSE;
-  $admin_config->set('ui.about_disabled', $help_menu_disabled);
+  $admin_config->set('ui.contribute_disabled', $help_menu_disabled);
   $admin_config->clear('ui.help_menu_disabled');
   $admin_config->save();
 }
@@ -1612,7 +1606,7 @@ function webform_update_8080() {
  * Issue #2913215: Remote Post handler add GET method support.
  */
 function webform_update_8081() {
-  _webform_update_webform_handler_configuration(RemotePostWebformHandler::class);
+  _webform_update_webform_handler_settings();
 }
 
 /**
@@ -1708,7 +1702,11 @@ function webform_update_8088() {
 /******************************************************************************/
 
 /******************************************************************************/
-// Webform-8.x-5.0-beta24+
+// Webform-8.x-5.0-beta24 - November 16, 2017 (No updates required).
+/******************************************************************************/
+
+/******************************************************************************/
+// Webform-8.x-5.0-beta25 - December 11, 2017.
 /******************************************************************************/
 
 /**
@@ -1778,6 +1776,10 @@ function webform_update_8094() {
   _webform_update_webform_settings();
 }
 
+/******************************************************************************/
+// Webform-8.x-5.0-rc1 - December 25, 2017.
+/******************************************************************************/
+
 /**
  * Issue #2918721: Access controlling Webform administration.
  */
@@ -1817,8 +1819,12 @@ function webform_update_8096() {
  * Issue #2932607: Add Twig support to email body.
  */
 function webform_update_8097() {
-  _webform_update_webform_handler_configuration(EmailWebformHandler::class);
+  _webform_update_webform_handler_settings();
 }
+
+/******************************************************************************/
+// Webform-8.x-5.0-rc2 - January 30, 2018.
+/******************************************************************************/
 
 /**
  * Issue #2933705: Element Range.
@@ -1878,7 +1884,7 @@ function webform_update_8099() {
  */
 function webform_update_8100() {
   // Add locked to action handler.
-  _webform_update_webform_handler_configuration(ActionWebformHandler::class);
+  _webform_update_webform_handler_settings();
 
   // Add locked to remote post handler's excluded data.
   /** @var \Drupal\webform\WebformInterface[] $webforms */
@@ -1947,6 +1953,10 @@ function webform_update_8104() {
   _webform_update_webform_settings();
 }
 
+/******************************************************************************/
+// Webform-8.x-5.0-rc3 - February 4, 2018.
+/******************************************************************************/
+
 /**
  * Issue #2941174 Notice: Undefined index: administer in WebformEntitySettingsAccessForm.
  */
@@ -1955,11 +1965,317 @@ function webform_update_8105() {
   webform_update_8095();
 }
 
+/******************************************************************************/
+// Webform-8.x-5.0-rc4
+/******************************************************************************/
+
 /**
- * Issue #2941297: Contribute dependency not auto enabled.
+ * Issue #2934970: Fully support for inline error form.
  */
-function webform_update_8106() {
-  if (!\Drupal::moduleHandler()->moduleExists('contribute')) {
-    \Drupal::service('module_installer')->install(['contribute']);
+function webform_update_8107() {
+  _webform_update_admin_settings();
+  _webform_update_webform_settings();
+}
+
+/**
+ * Issue #2944515: Report proper dependencies of a webform block.
+ */
+function webform_update_8108() {
+  /** @var \Drupal\block\Entity\Block $block */
+  foreach (\Drupal::entityTypeManager()->getStorage('block')->loadMultiple() as $block) {
+    if ($block->getPluginId() == 'webform_block') {
+      $webform_id = $block->getPlugin()->getConfiguration()['webform_id'];
+      if (\Drupal::entityTypeManager()->getStorage('webform')->load($webform_id)) {
+        $block->save();
+      }
+      else {
+        // The webform does not exist. There is no point to keep this block.
+        $block->delete();
+      }
+    }
   }
+}
+
+/**
+ * Issue #2933909: Webform Image Select Element Improvements.
+ */
+function webform_update_8109() {
+  $config_factory = \Drupal::configFactory();
+  $install_webform_image_select = FALSE;
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->get($webform_config_name);
+    $elements = $webform_config->get('elements');
+    if (strpos($elements, 'webform_image_select') !== FALSE) {
+      $install_webform_image_select = TRUE;
+      break;
+    }
+  }
+
+  if ($install_webform_image_select && !\Drupal::moduleHandler()->moduleExists('webform_image_select')) {
+    \Drupal::service('module_installer')->install(['webform_image_select']);
+  }
+}
+
+/**
+ * Issue #2947991: Disable the password field.
+ */
+function webform_update_8110() {
+  $config_factory = \Drupal::configFactory();
+  $has_password_element = FALSE;
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->get($webform_config_name);
+    $elements = $webform_config->get('elements');
+    // Check for password and password_confirm element #type.
+    if (strpos($elements, "'#type': password") !== FALSE) {
+      $has_password_element = TRUE;
+      break;
+    }
+  }
+
+  // If password element is not being used in any webform display both the
+  // password and password_confirm element.
+  if (!$has_password_element) {
+    $admin_config = \Drupal::configFactory()->getEditable('webform.settings');
+    $excluded_elements = $admin_config->get('element.excluded_elements') ?: [];
+    $excluded_elements['password'] = 'password';
+    $excluded_elements['password_confirm'] = 'password_confirm';
+    $admin_config->set('element.excluded_elements', $excluded_elements);
+    $admin_config->save();
+
+  }
+}
+
+/**
+ * Issue #2947991: Disable the password field. Fix webform_update_8110().
+ */
+function webform_update_8111() {
+  webform_update_8110();
+}
+
+/**
+ * Issue #2951368: Provide dedicated 'test' webform operation and access rule.
+ */
+function webform_update_8112() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $data = $webform_config->getRawData();
+    if (!isset($data['access']['test'])) {
+      $data['access']['test'] = [
+        'roles' => [],
+        'users' => [],
+        'permissions' => [],
+      ];
+      $webform_config->setData($data)->save();
+    }
+  }
+}
+
+/**
+ * Issue #2951001: Convert About section into Contribute section.
+ */
+function webform_update_8113() {
+  $config = \Drupal::configFactory()->getEditable('webform.settings');
+  $config->set('ui.contribute_disabled', $config->get('ui.about_disabled') ?: FALSE);
+  $config->save();
+}
+
+/**
+ * Issue #2951921: The contribute module is missing from the file system.
+ */
+function webform_update_8114() {
+  // Skip if the Contribute module still exists.
+  if (file_exists(drupal_get_path('module', 'contribute') . '/contribute.info.yml')) {
+    return;
+  }
+
+  $contribute_config = \Drupal::configFactory()->getEditable('contribute.settings');
+
+  // Migrate Contribute account info to Webform Contribute account info.
+  \Drupal::configFactory()->getEditable('webform.settings')
+    ->set('contribute.account_type', $contribute_config->get('account_type') ?: 'user')
+    ->set('contribute.account_id', $contribute_config->get('account_id') ?: NULL)
+    ->save();
+
+  // Manually delete the Contribute module's configuration.
+  $contribute_config->delete();
+
+  // Manually remove the contribute module from core.extension configuration.
+  $extension_config = \Drupal::configFactory()->getEditable('core.extension');
+  $module = $extension_config->get('module');
+  unset($module['contribute']);
+  $extension_config->set('module', $module);
+  $extension_config->save();
+
+  // Remove schema definitions.
+  \Drupal::database()->delete('key_value')
+    ->condition('collection', 'system.schema')
+    ->condition('name', 'contribute')
+    ->execute();
+}
+
+/**
+ * Issue #2955218: Allow query and token to be removed from confirmation URL.
+ */
+function webform_update_8115() {
+  _webform_update_webform_settings();
+}
+
+/**
+ * Stop #multiple__label and #multiple__labels from being saved with every element.
+ */
+function webform_update_8116() {
+  _webform_update_elements_clear_properties([
+    '#multiple__label' => '',
+    '#multiple__labels' => '',
+  ]);
+}
+
+/**
+ * Issue #2957192: Add postal_code to test data.
+ */
+function webform_update_8117() {
+  $config = \Drupal::configFactory()->getEditable('webform.settings');
+  $names = Yaml::decode($config->get('test.names'));
+  $names += [
+    'postal_code' => ['11111', '12345', '12345-6789']
+  ];
+  $config->set('test.names', WebformYaml::tidy(Yaml::encode($names)));
+  $config->save();
+}
+
+/**
+ * Issue #2957074: Invalid Tokens in Email Handler.
+ */
+function webform_update_8118() {
+  _webform_update_string_replace('[webform-submission:', '[webform_submission:');
+}
+
+/**
+ * Issue #2957002: Same webform multiple times on the same page.
+ */
+function webform_update_8119() {
+  // Issue #2863986: Allow updating modules with new service dependencies.
+  \Drupal::service('kernel')->rebuildContainer();
+
+  /** @var \Drupal\webform\WebformHelpManagerInterface $help_manager */
+  $help_manager = \Drupal::service('webform.help_manager');
+  $help_manager->addNotification('webform_update_8119',
+    t("<strong>ATTENTION DEVELOPERS!!!</strong> The webform submission form's  BASE_FORM_ID and FORM_ID have changed.") .
+    '<br/>' . t('Please make sure to update all webform related <code>hook_form_BASE_FORM_ID_alter()</code> and <code>hook_form_FORM_ID_alter()</code> hooks.') .
+    ' ' . t('<a href=":href">Learn more</a>', [':href' => 'https://www.drupal.org/node/2959264']),
+    'warning'
+  );
+}
+
+/**
+ * Issue #2953929: Remote handler does not display messages when HTTP status is different than 200.
+ */
+function webform_update_8120() {
+  _webform_update_webform_handler_settings();
+}
+
+/**
+ * Issue #2953929: Remote handler does not display messages when HTTP status is different than 200.
+ */
+function webform_update_8121() {
+  _webform_update_webform_handler_settings();
+}
+
+/**
+ * Issue #2952419: Attached files are deleted without usage checking
+ */
+function webform_update_8122() {
+  _webform_update_admin_settings();
+}
+
+/**
+ * Issue #2962442: Remove [webform-authenticated-user] token and use [current-user] token with clear value option.
+ */
+function webform_update_8123() {
+  _webform_update_string_replace('[webform-authenticated-user:', '[current-user:');
+}
+
+/**
+ * Issue #2971207: Hidden Field updated values not being captured on Submit.
+ */
+function webform_update_8124() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('webform.webform.') as $webform_config_name) {
+    $webform_config = $config_factory->getEditable($webform_config_name);
+    $data = $webform_config->getRawData();
+    if (strpos($data['elements'], "'#type': hidden") !== FALSE) {
+      $elements = Yaml::decode($data['elements']);
+      _webform_update_8124($elements);
+      $data['elements'] = Yaml::encode($elements);
+
+      $webform_config->setData($data);
+      $webform_config->save();
+    }
+  }
+}
+
+/**
+ * Recursively convert hidden elements #value to #default_value.
+ *
+ * @param array $element
+ *   An element.
+ */
+function _webform_update_8124(array &$element) {
+  if (isset($element['#type']) && $element['#type'] === 'hidden') {
+    if (isset($element['#value']) && !isset($element['#default_value'])) {
+      $element['#default_value'] = $element['#value'];
+      unset($element['#value']);
+    }
+  }
+  foreach (Element::children($element) as $key) {
+    if (is_array($element[$key])) {
+      _webform_update_8124($element[$key]);
+    }
+  }
+}
+
+/**
+ * Issue #2966507: Start-to-finish documentation for showing Webforms in modals.
+ */
+function webform_update_8125() {
+  _webform_update_admin_settings();
+}
+
+/**
+ * Issue #2973377: Make the previously saved messages customizable.
+ */
+function webform_update_8126() {
+  _webform_update_admin_settings();
+  _webform_update_webform_settings();
+}
+
+/**
+ * Issue #2974597: Enable default publishing status of new webforms.
+ */
+function webform_update_8127() {
+  _webform_update_admin_settings();
+}
+
+/**
+ * Issue #2932893: Filter out closed forms in webform field.
+ */
+function webform_update_8128() {
+  _webform_update_webform_settings();
+}
+
+/**
+ * Issue #2977378: Add 'exclude unselected checkboxes' from email notification and preview.
+ */
+function webform_update_8129() {
+  _webform_update_admin_settings();
+  _webform_update_webform_settings();
+  _webform_update_webform_handler_settings();
+}
+
+/**
+ * Issue #2974153: Non admin duplicate form.
+ */
+function webform_update_8130() {
+  _webform_update_webform_settings();
 }

@@ -6,6 +6,9 @@ webform.settings:
       type: mapping
       label: 'Webform default settings'
       mapping:
+        default_status:
+          type: string
+          label: 'Default status'
         default_page_base_path:
           type: string
           label: 'Default base path'
@@ -36,6 +39,9 @@ webform.settings:
         default_form_novalidate:
           type: boolean
           label: 'Disable client-side validation'
+        default_form_disable_inline_errors:
+          type: boolean
+          label: 'Disable inline form errors'
         default_form_required:
           type: boolean
           label: 'Display required indicator'
@@ -117,6 +123,12 @@ webform.settings:
         default_submission_locked_message:
           type: text
           label: 'Default submission locked message'
+        default_previous_submission_message:
+          type: text
+          label: 'Default previous submission message'
+        default_previous_submissions_message:
+          type: text
+          label: 'Default previous submissions message'
         default_autofill_message:
           type: text
           label: 'Default submission autofill message'
@@ -135,6 +147,28 @@ webform.settings:
         confirmation_back_classes:
           type: string
           label: 'Confirmation back link CSS classes'
+        dialog:
+          type: boolean
+          label: 'Enable webform dialog support'
+        dialog_options:
+          type: sequence
+          label: 'Preset dialog options'
+          sequence:
+            type: mapping
+            label: 'Dialog options'
+            mapping:
+              name:
+                type: string
+                label: 'Dialog name'
+              title:
+                type: label
+                label: 'Dialog title'
+              width:
+                type: integer
+                label: 'Dialog width'
+              height:
+                type: integer
+                label: 'Dialog height'
     assets:
       type: mapping
       label: 'Global Assets (CSS/JavaScript)'
@@ -235,6 +269,12 @@ webform.settings:
         default_document_file_extensions:
           type: string
           label: 'Default allowed document file extensions'
+        make_unused_managed_files_temporary:
+          type: boolean
+          label: 'Controls if unused files should be marked temporary'
+        delete_temporary_managed_files:
+          type: boolean
+          label: 'Immediately deleted temporary managed files'
     format:
       type: ignore
       label: 'Format default settings'
@@ -386,9 +426,9 @@ webform.settings:
         dialog_disabled:
           type: boolean
           label: 'Disable dialogs'
-        about_disabled:
+        contribute_disabled:
           type: boolean
-          label: 'Disable about'
+          label: 'Disable contribute'
         offcanvas_disabled:
           type: boolean
           label: 'Disable system tray'
@@ -424,6 +464,16 @@ webform.settings:
         spam:
           type: boolean
           label: 'Check if SPAM protection module is installed'
+    contribute:
+      type: mapping
+      label: 'Contribute'
+      mapping:
+        account_type:
+          type: string
+          label: 'Account type'
+        account_id:
+          type: string
+          label: 'Account ID'
     third_party_settings:
       type: sequence
       label: 'Third party settings'

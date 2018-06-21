@@ -81,6 +81,18 @@ class WebformAdminConfigSubmissionsForm extends WebformAdminConfigBaseForm {
       '#required' => TRUE,
       '#default_value' => $settings['default_submission_locked_message'],
     ];
+    $form['submission_settings']['default_previous_submission_message'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('Default previous submission message'),
+      '#required' => TRUE,
+      '#default_value' => $settings['default_previous_submission_message'],
+    ];
+    $form['submission_settings']['default_previous_submissions_message'] = [
+      '#type' => 'webform_html_editor',
+      '#title' => $this->t('Default previous submissions message'),
+      '#required' => TRUE,
+      '#default_value' => $settings['default_previous_submissions_message'],
+    ];
     $form['submission_settings']['default_autofill_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Default autofill message'),
@@ -128,13 +140,11 @@ class WebformAdminConfigSubmissionsForm extends WebformAdminConfigBaseForm {
     $form['submission_limits']['default_limit_total_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Default total submissions limit message'),
-      '#required' => TRUE,
       '#default_value' => $config->get('settings.default_limit_total_message'),
     ];
     $form['submission_limits']['default_limit_user_message'] = [
       '#type' => 'webform_html_editor',
       '#title' => $this->t('Default per user submission limit message'),
-      '#required' => TRUE,
       '#default_value' => $config->get('settings.default_limit_user_message'),
     ];
     $form['submission_limits']['token_tree_link'] = $this->tokenManager->buildTreeLink();
@@ -153,6 +163,8 @@ class WebformAdminConfigSubmissionsForm extends WebformAdminConfigBaseForm {
       '#default_value' => $config->get('purge.cron_size'),
       '#description' => $this->t('Enter the amount of submissions to be purged during single cron run. You may want to lower this number if you are facing memory or timeout issues when purging via cron.'),
     ];
+
+    $this->tokenManager->elementValidate($form);
 
     return parent::buildForm($form, $form_state);
   }

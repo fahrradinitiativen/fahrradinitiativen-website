@@ -8,6 +8,7 @@ open: null
 close: null
 uid: null
 template: false
+archive: false
 id: test_composite_format_multiple
 title: 'Test: Composite: Format composite multiple values'
 description: 'Test composite element formatting with multiple value.'
@@ -30,21 +31,21 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             address: '10 Main Street'
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             address: '10 Main Street'
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
         '#format_items': ol
       webform_address_ul:
@@ -57,21 +58,21 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             address: '10 Main Street'
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             address: '10 Main Street'
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
         '#format_items': ul
       webform_address_hr:
@@ -84,21 +85,21 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             address: '10 Main Street'
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             address: '10 Main Street'
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
         '#format_items': hr
       webform_address_table:
@@ -111,21 +112,21 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             address: '10 Main Street'
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             address: '10 Main Street'
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
         '#format_items': table
     webform_contact:
@@ -145,7 +146,7 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             name: Loremipsum
@@ -156,7 +157,7 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             name: Loremipsum
@@ -167,7 +168,7 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
         '#format_items': ol
       webform_contact_ul:
@@ -184,7 +185,7 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             name: Loremipsum
@@ -195,7 +196,7 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             name: Loremipsum
@@ -206,7 +207,7 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
         '#format_items': ul
       webform_contact_hr:
@@ -223,7 +224,7 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             name: Loremipsum
@@ -234,7 +235,7 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             name: Loremipsum
@@ -245,7 +246,7 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
         '#format_items': hr
       webform_contact_table:
@@ -262,7 +263,7 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             name: Loremipsum
@@ -273,7 +274,7 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
           -
             name: Loremipsum
@@ -284,8 +285,119 @@ elements: |
             address_2: '10 Main Street'
             city: Springfield
             state_province: Alabama
-            postal_code: Loremipsum
+            postal_code: '11111'
             country: Afghanistan
+        '#format_items': table
+    webform_custom_composite:
+      '#type': details
+      '#title': 'Custom composite'
+      webform_custom_composite_ol:
+        '#type': webform_custom_composite
+        '#title': 'Custom composite (Ordered list)'
+        '#element':
+          name:
+            '#type': textfield
+            '#title': Name
+            '#title_display': invisible
+          gender:
+            '#type': select
+            '#title': Gender
+            '#title_display': invisible
+            '#options':
+              Male: Male
+              Female: Female
+        '#multiple': true
+        '#default_value':
+          -
+            name: Loremipsum
+            gender: Male
+          -
+            name: Loremipsum
+            gender: Male
+          -
+            name: Loremipsum
+            gender: Male
+        '#format_items': ol
+      webform_custom_composite_ul:
+        '#type': webform_custom_composite
+        '#title': 'Custom composite (Unordered list)'
+        '#element':
+          name:
+            '#type': textfield
+            '#title': Name
+            '#title_display': invisible
+          gender:
+            '#type': select
+            '#title': Gender
+            '#title_display': invisible
+            '#options':
+              Male: Male
+              Female: Female
+        '#multiple': true
+        '#default_value':
+          -
+            name: Loremipsum
+            gender: Male
+          -
+            name: Loremipsum
+            gender: Male
+          -
+            name: Loremipsum
+            gender: Male
+        '#format_items': ul
+      webform_custom_composite_hr:
+        '#type': webform_custom_composite
+        '#title': 'Custom composite (Horizontal rule)'
+        '#element':
+          name:
+            '#type': textfield
+            '#title': Name
+            '#title_display': invisible
+          gender:
+            '#type': select
+            '#title': Gender
+            '#title_display': invisible
+            '#options':
+              Male: Male
+              Female: Female
+        '#multiple': true
+        '#default_value':
+          -
+            name: Loremipsum
+            gender: Male
+          -
+            name: Loremipsum
+            gender: Male
+          -
+            name: Loremipsum
+            gender: Male
+        '#format_items': hr
+      webform_custom_composite_table:
+        '#type': webform_custom_composite
+        '#title': 'Custom composite (Table)'
+        '#element':
+          name:
+            '#type': textfield
+            '#title': Name
+            '#title_display': invisible
+          gender:
+            '#type': select
+            '#title': Gender
+            '#title_display': invisible
+            '#options':
+              Male: Male
+              Female: Female
+        '#multiple': true
+        '#default_value':
+          -
+            name: Loremipsum
+            gender: Male
+          -
+            name: Loremipsum
+            gender: Male
+          -
+            name: Loremipsum
+            gender: Male
         '#format_items': table
     webform_link:
       '#type': details
@@ -622,6 +734,7 @@ settings:
   form_reset: false
   form_disable_autocomplete: false
   form_novalidate: false
+  form_disable_inline_errors: false
   form_required: false
   form_unsaved: false
   form_disable_back: false
@@ -633,10 +746,13 @@ settings:
   submission_label: ''
   submission_log: false
   submission_user_columns: {  }
+  submission_user_duplicate: false
   submission_login: false
   submission_login_message: ''
   submission_exception_message: ''
   submission_locked_message: ''
+  previous_submission_message: ''
+  previous_submissions_message: ''
   autofill: false
   autofill_message: ''
   autofill_excluded_elements: {  }
@@ -654,6 +770,7 @@ settings:
   preview_attributes: {  }
   preview_excluded_elements: {  }
   preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
   draft: none
   draft_multiple: false
   draft_auto_save: false
@@ -667,6 +784,8 @@ settings:
   confirmation_back: true
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -721,7 +840,7 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
-  administer:
+  test:
     roles: {  }
     users: {  }
     permissions: {  }
@@ -750,6 +869,7 @@ handlers:
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
+      exclude_empty_checkbox: false
       html: false
       attachments: false
       twig: false
@@ -782,6 +902,7 @@ handlers:
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
+      exclude_empty_checkbox: false
       html: true
       attachments: false
       twig: false

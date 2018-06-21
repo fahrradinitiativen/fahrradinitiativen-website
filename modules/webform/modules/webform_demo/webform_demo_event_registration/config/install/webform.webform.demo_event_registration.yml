@@ -10,6 +10,7 @@ open: null
 close: null
 uid: null
 template: false
+archive: false
 id: demo_event_registration
 title: 'Demo: Event Registration'
 description: 'A demonstration of an event registration form.'
@@ -68,6 +69,7 @@ settings:
   form_reset: false
   form_disable_autocomplete: false
   form_novalidate: false
+  form_disable_inline_errors: false
   form_required: false
   form_unsaved: false
   form_disable_back: false
@@ -79,10 +81,13 @@ settings:
   submission_label: ''
   submission_log: true
   submission_user_columns: {  }
+  submission_user_duplicate: false
   submission_login: false
   submission_login_message: ''
   submission_exception_message: ''
   submission_locked_message: ''
+  previous_submission_message: ''
+  previous_submissions_message: ''
   autofill: false
   autofill_message: ''
   autofill_excluded_elements: {  }
@@ -100,6 +105,7 @@ settings:
   preview_attributes: {  }
   preview_excluded_elements: {  }
   preview_exclude_empty: true
+  preview_exclude_empty_checkbox: false
   draft: none
   draft_multiple: false
   draft_auto_save: false
@@ -113,6 +119,8 @@ settings:
   confirmation_back: true
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
+  confirmation_exclude_query: false
+  confirmation_exclude_token: false
   limit_total: null
   limit_total_interval: null
   limit_total_message: ''
@@ -159,6 +167,10 @@ access:
     roles: {  }
     users: {  }
     permissions: {  }
+  test:
+    roles: {  }
+    users: {  }
+    permissions: {  }
 handlers:
   email_notification:
     id: email
@@ -166,7 +178,7 @@ handlers:
     handler_id: email_notification
     status: true
     conditions: {  }
-    weight: 1
+    weight: -49
     settings:
       states:
         - completed
@@ -184,6 +196,7 @@ handlers:
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
+      exclude_empty_checkbox: false
       html: true
       attachments: false
       twig: false
@@ -198,7 +211,7 @@ handlers:
     handler_id: email_reminder
     status: true
     conditions: {  }
-    weight: 1
+    weight: -48
     settings:
       states:
         - completed
@@ -216,6 +229,7 @@ handlers:
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
+      exclude_empty_checkbox: false
       html: true
       attachments: false
       twig: false
@@ -227,3 +241,18 @@ handlers:
       send: '[webform_submission:node:field_webform_demo_event_date:value]'
       days: -1
       unschedule: false
+  submission_limit:
+    id: settings
+    label: 'Submission limit'
+    handler_id: submission_limit
+    status: true
+    conditions: {  }
+    weight: -50
+    settings:
+      preview_title: ''
+      preview_message: ''
+      confirmation_url: ''
+      confirmation_title: ''
+      confirmation_message: ''
+      debug: ''
+      entity_limit_total: '[webform_submission:node:field_webform_entity_limit_total]'

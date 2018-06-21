@@ -169,7 +169,7 @@ function template_preprocess_webform_confirmation(array &$variables) {
   }
 
   // Set message.
-  $variables['message'] = $message_manager->build(WebformMessageManagerInterface::SUBMISSION_CONFIRMATION);
+  $variables['message'] = $message_manager->build(WebformMessageManagerInterface::SUBMISSION_CONFIRMATION_MESSAGE);
 
   // Set attributes.
   $variables['attributes'] = new Attribute($settings['confirmation_attributes']);
@@ -196,6 +196,7 @@ function template_preprocess_webform_confirmation(array &$variables) {
 
   // Set back_url.
   if ($source_entity && $source_entity->hasLinkTemplate('canonical')) {
+    $source_entity = \Drupal::service('entity.repository')->getTranslationFromContext($source_entity);
     $variables['back_url'] = $source_entity->toUrl('canonical', $options)->toString();
   }
   elseif ($webform_submission) {
@@ -557,8 +558,11 @@ function _template_preprocess_webform_progress(array &$variables) {
 
   // Reset the pages variable.
   $variables['progress'] = [];
-  foreach ($pages as $page) {
-    $variables['progress'][] = (isset($page['#title'])) ? $page['#title'] : '';
+  foreach ($pages as $key => $page) {
+    $variables['progress'][] = [
+      'name' => $key,
+      'title' => (isset($page['#title'])) ? $page['#title'] : '',
+    ];
   }
 }
 
@@ -717,19 +721,6 @@ function template_preprocess_webform_composite_address(array &$variables) {
  *   - element: An associative array containing the properties of the element.
  */
 function template_preprocess_webform_composite_contact(array &$variables) {
-  _template_preprocess_webform_composite($variables);
-}
-
-/**
- * Prepares variables for creditcard composite element templates.
- *
- * Default template: webform-element-creditcard.html.twig.
- *
- * @param array $variables
- *   An associative array containing:
- *   - element: An associative array containing the properties of the element.
- */
-function template_preprocess_webform_composite_creditcard(array &$variables) {
   _template_preprocess_webform_composite($variables);
 }
 
@@ -935,8 +926,18 @@ function template_preprocess_webform_element_image_file(array &$variables) {
     }
     $variables['image'] += [
       '#uri' => $uri,
-      '#attributes' => ['class' => ['webform-image-file'], 'alt' => $file->getFilename()],
+      '#attributes' => [
+        'class' => ['webform-image-file'],
+        'alt' => $file->getFilename(),
+        'title' => $file->getFilename(),
+      ],
     ];
+
+    // For the Results table always display the file name as a tooltip.
+    if (strpos(\Drupal::routeMatch()->getRouteName(), 'webform.results_submissions') !== FALSE) {
+      $variables['attached']['library'][] = 'webform/webform.tooltip';
+      $variables['image']['#attributes']['class'][] = 'js-webform-tooltip-link';
+    }
 
     // Wrap 'image' in a link/modal.
     if ($format && $format != 'image') {
