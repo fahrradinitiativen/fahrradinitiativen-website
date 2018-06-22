@@ -54,6 +54,7 @@
                 font-weight: 600;
                 background: transparent;
                 bottom: -8px;
+                padding-top: 10px;
                 position: relative;
                 color: $blue;
                 border-bottom: 8px solid transparent;
@@ -66,6 +67,27 @@
             }
             &:last-child {
                 float: right;
+            }
+            .dropdown-menu {
+                max-width: 170px;
+                border: 0;
+                @include border-radius(0);
+                -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0);
+                box-shadow: 0 0 0 0 rgba(0,0,0,0);
+                li {
+                    margin: 0;
+                    float: none;
+                    a {
+                        font-size: 13px;
+                        bottom: auto;
+                        border: 0;
+                        padding: 8px 20px;
+                        white-space: normal;
+                        &:hover {
+                            opacity: .7;
+                        }
+                    }
+                }
             }
         }
     }
