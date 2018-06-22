@@ -1,0 +1,14 @@
+uuid: 6c635fa2-510a-4792-a9a5-4f0aa7fc7b4e
+langcode: de
+status: true
+dependencies:
+  enforced:
+    module:
+      - webform
+_core:
+  default_config_hash: KfYqMSrFJ5iGtDzvy_rGUeRUJ4KyM7Xt-tWtYx9WjiM
+id: state_names
+label: 'Name des Bundeslandes'
+category: Geographic
+likert: false
+options: "Alabama: Alabama\nAlaska: Alaska\nArizona: Arizona\nArkansas: Arkansas\nKalifornien: Kalifornien\nColorado: Colorado\nConnecticut: Connecticut\nDelaware: Delaware\nDistrict Kolumbien': 'District Kolumbien'\nFlorida: Florida\nGeorgia : Georgia\nHawaii: Hawaii\nIdaho: Idaho\nIllinois: Illinois\nIndiana: Indiana\nIowa: Iowa\nKansas: Kansas\nKentucky: Kentucky\nLouisiana: Louisiana\nMaine: Maine\nMaryland: Maryland\nMassachusetts: Massachusetts\nMichigan: Michigan\nMinnesota: Minnesota\nMississippi: Mississippi\nMissouri: Missouri\nMontana: Montana\nNebraska: Nebraska\nNevada: Nevada\n'New Hampshire': 'New Hampshire'\n'New Jersey': 'New Jersey'\nNew Mexiko: New Mexico\nNew York: New York\nNorth Carolina: North Carolina\nNorth Dakota: North Dakota\nOhio: Ohio\nOklahoma: Oklahoma\nOregon: Oregon\nPennsylvania: Pennsylvania\n'Rhode Island': 'Rhode Island'\n'South Carolina': 'South Carolina'\n'South Dakota': 'South Dakota'\nTennessee: Tennessee\nTexas: Texas\nUtah: Utah\nVermont: Vermont\nVirginia: Virginia\nWashington: Washington\n'West Virginia': 'West Virginia'\nWisconsin: Wisconsin\nWyoming: Wyoming\n"

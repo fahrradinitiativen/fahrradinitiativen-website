@@ -14,7 +14,6 @@ dependencies:
     - field.field.node.pool.field_linkedin
     - field.field.node.pool.field_logo
     - field.field.node.pool.field_subline
-    - field.field.node.pool.field_tags
     - field.field.node.pool.field_tags_art
     - field.field.node.pool.field_tags_bundesland
     - field.field.node.pool.field_tags_initiativen
@@ -134,14 +133,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
-    region: content
-  field_tags:
-    weight: 7
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
     region: content
   field_tags_initiativen:
     weight: 5

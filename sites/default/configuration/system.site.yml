@@ -1,11 +1,11 @@
 uuid: 93893f55-19b3-440b-a794-7b16b52b0859
-name: fahrrad-Initiativen.de
+name: fahrrad-initiativen.de
 mail: no-reply@fahrrad-initiativen.de
 slogan: ''
 page:
   403: ''
   404: ''
-  front: /node/38
+  front: /node/1
 admin_compact_mode: false
 weight_select_max: 100
 langcode: de

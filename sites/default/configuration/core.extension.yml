@@ -34,6 +34,7 @@ module:
   masonry: 0
   masonry_views: 0
   masquerade: 0
+  menu_block: 0
   menu_ui: 0
   node: 0
   options: 0
@@ -52,9 +53,13 @@ module:
   update: 0
   user: 0
   views_ui: 0
+  webform: 0
+  webform_node: 0
+  webform_ui: 0
   contribute: 1
   menu_link_content: 1
   pathauto: 1
+  webform_bootstrap: 1
   views: 10
   standard: 1000
 theme:

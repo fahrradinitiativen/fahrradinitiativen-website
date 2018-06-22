@@ -1,0 +1,14 @@
+uuid: ef7a0219-1c13-4cae-b327-43df5a36b4f1
+langcode: de
+status: true
+dependencies:
+  enforced:
+    module:
+      - webform
+_core:
+  default_config_hash: F06dZHOswbBUTcn_wy0oMUXNLkgKT9YZOJ5CdkkZgb0
+id: state_province_codes
+label: Landes-/Bezirkskürzel
+category: Geographic
+likert: false
+options: "AL: Alabama\nAK: Alaska\nAS: 'Amerikanisch-Samoa'\nAZ: Arizona\nAR: Arkansas\nAE: 'Streitkräfte (Kanada, Europa, Afrika oder Naher Osten'\nAA: 'Armed Forces Americas'\nAP: 'Armed Forces Pacific'\nCA: Kalifornien\nCO: Colorado\nCT: Connecticut\nDE: Delaware\nDC: 'District of Columbia'\nFM: 'Föderierte Staaten von Mikronesien'\nFL: Florida\nGA: Georgia\nGU: Guam\nHI: Hawaii\nID: Idaho\nIL: Illinois\nIN: Indiana\nIE: Iowa\nKS: Kansas\nKJ: Kentucky\nLA: Louisiana\nME: Maine\nMH: 'Marshallinseln'\nMD: Maryland\nMA: Massachusetts\nMI: Michigan\nMN: Minnesota\nMS: Mississippi\nMO: Missouri\nMT: Montana\nNE: Nebraska\nNV: Nevada\nNH: 'New Hampshire'\nNJ: 'New Jersey'\nNM: 'New Mexico'\nNY: 'New York'\nNC: 'North Carolina'\nND: 'North Dakota'\nMP: 'Nördliche Marianen'\nOH: Ohio\nOK: Oklahoma\nOR: Oregon\nPW: Palau\nPA: Pennsylvania\nPR: 'Puerto Rico'\nRI: 'Rhode Island'\nSC: 'South Carolina'\nSD: 'South Dakota'\nTN: Tennessee\nTX: Texas\nUT: Utah\nVT: Vermont\nVI: 'Virgin Islands'\nVA: Virginia\nWA: Washington\nWV: 'West Virginia'\nWI: Wisconsin\nWJ: Wyoming\n"

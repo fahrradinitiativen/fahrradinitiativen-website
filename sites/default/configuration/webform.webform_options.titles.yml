@@ -1,0 +1,14 @@
+uuid: 4211400f-adfd-42a9-8c27-6afa13f11dd4
+langcode: de
+status: true
+dependencies:
+  enforced:
+    module:
+      - webform
+_core:
+  default_config_hash: PEUoedWrfYEX7oZ8CcOukfBTVxar1cPSROX8534esuU
+id: titles
+label: Titles
+category: Demographisch
+likert: false
+options: "Fräulein: Fräulein\nFrau: Frau\nHerr: Herr\nMrs: Mrs\nDr: Dr\n"

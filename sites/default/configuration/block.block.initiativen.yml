@@ -2,11 +2,8 @@ uuid: ec7aab25-6764-40af-9047-7c905bc384e3
 langcode: de
 status: true
 dependencies:
-  content:
-    - 'block_content:basic:0888df12-13c7-4108-9308-1c32b3af63d6'
   module:
     - block_class
-    - block_content
     - system
   theme:
     - fahrradinitiativen

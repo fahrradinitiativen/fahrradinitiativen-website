@@ -1,0 +1,16 @@
+uuid: cd26af80-b90f-4737-bf6a-a05ddd0b66df
+langcode: de
+status: true
+dependencies:
+  enforced:
+    module:
+      - webform_node
+_core:
+  default_config_hash: BuY_3PjmYtRTSuvyFORJZUe0-TQiNXEE6yYQ_dkjxW8
+name: Webform
+type: webform
+description: 'Eine einfache Seite an die ein Web-Formular angefügt wird.'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

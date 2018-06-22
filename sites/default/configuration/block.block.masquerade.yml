@@ -9,11 +9,11 @@ dependencies:
     - fahrradinitiativen
 third_party_settings:
   block_class:
-    classes: ''
+    classes: col-sm-4
 id: masquerade
 theme: fahrradinitiativen
 region: footer
-weight: 0
+weight: -4
 provider: null
 plugin: masquerade
 settings:

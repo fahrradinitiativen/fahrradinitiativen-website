@@ -1,0 +1,14 @@
+uuid: 30c2bf02-8abf-4b84-84a4-dc4d4c8a9e0c
+langcode: de
+status: true
+dependencies:
+  enforced:
+    module:
+      - webform
+_core:
+  default_config_hash: LkO63Zl2cP_l9YdjzWI8dWoD9uD0pytkPiUiUM2bo9A
+id: phone_types
+label: Telefontyp
+category: Demographisch
+likert: false
+options: "Zuhause: Zuhause\nArbeit: Arbeit\nMobil: Mobil\n"

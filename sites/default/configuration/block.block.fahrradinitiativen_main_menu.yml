@@ -5,9 +5,13 @@ dependencies:
   config:
     - system.menu.main
   module:
+    - block_class
     - system
   theme:
     - fahrradinitiativen
+third_party_settings:
+  block_class:
+    classes: ''
 _core:
   default_config_hash: rx9IrdDv7Ldc4kpalZAxdhIPZfYIeOMh1N-qKoQZwHo
 id: fahrradinitiativen_main_menu
@@ -22,5 +26,5 @@ settings:
   provider: system
   label_display: '0'
   level: 1
-  depth: 1
+  depth: 0
 visibility: {  }

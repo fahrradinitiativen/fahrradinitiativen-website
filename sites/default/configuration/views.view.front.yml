@@ -8,8 +8,8 @@ dependencies:
     - node.type.pool
     - taxonomy.vocabulary.art
   content:
-    - 'taxonomy_term:art:0fa5dba9-5f98-4e2a-95b6-b656e4847cab'
-    - 'taxonomy_term:art:ffe858e9-a660-455a-809e-a9d02509cdcb'
+    - 'taxonomy_term:art:3f525aff-c747-4708-9562-9e093402e072'
+    - 'taxonomy_term:art:950cf50f-c25b-4266-b09b-6d4b779af91d'
   module:
     - node
     - taxonomy
@@ -294,7 +294,7 @@ display:
           admin_label: ''
           operator: or
           value:
-            6: 6
+            2: 2
           group: 1
           exposed: false
           expose:
@@ -414,7 +414,7 @@ display:
           admin_label: ''
           operator: or
           value:
-            5: 5
+            1: 1
           group: 1
           exposed: false
           expose:

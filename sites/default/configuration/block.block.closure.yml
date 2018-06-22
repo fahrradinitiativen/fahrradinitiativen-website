@@ -1,0 +1,29 @@
+uuid: a9603eb7-3efb-41f5-ac98-b953750cb4e0
+langcode: de
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:cdebece5-46d0-42bb-8bf1-cf0f8a684f4e'
+  module:
+    - block_class
+    - block_content
+  theme:
+    - fahrradinitiativen
+third_party_settings:
+  block_class:
+    classes: col-sm-4
+id: closure
+theme: fahrradinitiativen
+region: footer
+weight: -5
+provider: null
+plugin: 'block_content:cdebece5-46d0-42bb-8bf1-cf0f8a684f4e'
+settings:
+  id: 'block_content:cdebece5-46d0-42bb-8bf1-cf0f8a684f4e'
+  label: Closure
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

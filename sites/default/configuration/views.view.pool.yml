@@ -388,7 +388,20 @@ display:
           plugin_id: random
       header: {  }
       footer: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: true
+          tokenize: false
+          content:
+            value: "<div class=\"col-sm-12\">\nDie Suche ergab 0 Treffer\n</div>"
+            format: full_html
+          plugin_id: text
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
@@ -396,7 +409,7 @@ display:
         operator: AND
         groups:
           1: AND
-      use_ajax: true
+      use_ajax: false
     cache_metadata:
       max-age: 0
       contexts:
@@ -417,13 +430,14 @@ display:
       path: pool
       menu:
         type: normal
-        title: pool
+        title: vernetzen
         description: ''
         expanded: false
         parent: ''
-        weight: 0
+        weight: -48
         context: '0'
         menu_name: main
+        enabled: true
     cache_metadata:
       max-age: 0
       contexts:

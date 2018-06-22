@@ -14,7 +14,6 @@ dependencies:
     - field.field.node.pool.field_linkedin
     - field.field.node.pool.field_logo
     - field.field.node.pool.field_subline
-    - field.field.node.pool.field_tags
     - field.field.node.pool.field_tags_art
     - field.field.node.pool.field_tags_bundesland
     - field.field.node.pool.field_tags_initiativen
@@ -193,15 +192,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
-    region: content
-  field_tags:
-    weight: 133
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: entity_reference_autocomplete
     region: content
   field_tags_art:
     weight: 131

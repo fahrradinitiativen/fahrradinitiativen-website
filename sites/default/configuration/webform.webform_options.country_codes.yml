@@ -1,0 +1,14 @@
+uuid: 854b729e-eb13-418c-a678-914dacdee0d6
+langcode: de
+status: true
+dependencies:
+  enforced:
+    module:
+      - webform
+_core:
+  default_config_hash: adQ16YGDPk7QfUKrfrC35o2sKdHEozdNtdpiH7CftQQ
+id: country_codes
+label: Länderkürzel
+category: Geographic
+likert: false
+options: ''

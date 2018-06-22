@@ -1,0 +1,28 @@
+uuid: d0bf9449-2020-4b2a-bd12-1530939a12fa
+langcode: de
+status: true
+dependencies:
+  config:
+    - webform.webform.newsletter
+  module:
+    - block_class
+    - webform
+  theme:
+    - fahrradinitiativen
+third_party_settings:
+  block_class:
+    classes: col-sm-4
+id: webform
+theme: fahrradinitiativen
+region: footer
+weight: -6
+provider: null
+plugin: webform_block
+settings:
+  id: webform_block
+  label: 'changing-cities-newsletter bestellen'
+  provider: webform
+  label_display: visible
+  webform_id: newsletter
+  default_data: ''
+visibility: {  }
