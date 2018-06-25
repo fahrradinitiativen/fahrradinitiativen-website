@@ -1,0 +1,4 @@
+name: Fahrradinitiativen
+description: Overrides basic functions
+core: 8.x
+type: module

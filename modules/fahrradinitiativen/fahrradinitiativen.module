@@ -1,0 +1,22 @@
+<?php
+
+use \Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter()
+ * 
+ * Perform alterations before a form is rendered.
+ * 
+ * @param type $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param type $form_id
+ */
+
+function fahrradinitiativen_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+    
+    if($form_id == 'search_block_form'){        
+        $form['keys']['#title'] = 'Suchbegriff';
+    }
+  
+  
+}
