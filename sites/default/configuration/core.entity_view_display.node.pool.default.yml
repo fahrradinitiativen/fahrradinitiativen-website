@@ -43,7 +43,7 @@ content:
     third_party_settings: {  }
     region: content
   field_email:
-    weight: 10
+    weight: 9
     label: above
     settings: {  }
     third_party_settings: {  }
@@ -58,7 +58,7 @@ content:
       link: true
     third_party_settings: {  }
   field_facebook:
-    weight: 12
+    weight: 11
     label: hidden
     settings:
       trim_length: 80
@@ -79,7 +79,7 @@ content:
     type: image
     region: content
   field_images:
-    weight: 9
+    weight: 8
     label: hidden
     settings:
       image_style: thumbnail
@@ -95,7 +95,7 @@ content:
     type: text_default
     region: content
   field_link:
-    weight: 11
+    weight: 10
     label: above
     settings:
       trim_length: 80
@@ -107,7 +107,7 @@ content:
     type: link
     region: content
   field_linkedin:
-    weight: 14
+    weight: 13
     label: hidden
     settings:
       trim_length: 80
@@ -119,7 +119,7 @@ content:
     type: link
     region: content
   field_logo:
-    weight: 8
+    weight: 7
     label: hidden
     settings:
       image_style: ''
@@ -134,6 +134,22 @@ content:
     third_party_settings: {  }
     type: text_default
     region: content
+  field_tags_art:
+    type: entity_reference_label
+    weight: 18
+    region: content
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_tags_bundesland:
+    type: entity_reference_label
+    weight: 17
+    region: content
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
   field_tags_initiativen:
     weight: 5
     label: above
@@ -142,8 +158,24 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_tags_kategorie:
+    type: entity_reference_label
+    weight: 16
+    region: content
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  field_tags_stadt:
+    type: entity_reference_label
+    weight: 15
+    region: content
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
   field_twitter:
-    weight: 13
+    weight: 12
     label: hidden
     settings:
       trim_length: 80
@@ -163,7 +195,7 @@ content:
     type: file_default
     region: content
   field_xing:
-    weight: 15
+    weight: 14
     label: hidden
     settings:
       trim_length: 80
@@ -174,15 +206,16 @@ content:
     third_party_settings: {  }
     type: link
     region: content
+  flippy_pager:
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   links:
-    weight: 16
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
-  field_tags_art: true
-  field_tags_bundesland: true
-  field_tags_kategorie: true
-  field_tags_stadt: true
   field_teaser: true
   langcode: true
