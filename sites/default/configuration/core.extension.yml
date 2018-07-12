@@ -19,6 +19,7 @@ module:
   devel_generate: 0
   dynamic_page_cache: 0
   editor: 0
+  fahrrad_initiativen: 0
   field: 0
   field_group: 0
   field_ui: 0

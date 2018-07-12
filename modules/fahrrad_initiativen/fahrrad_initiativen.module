@@ -12,7 +12,7 @@ use \Drupal\Core\Form\FormStateInterface;
  * @param type $form_id
  */
 
-function fahrradinitiativen_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function fahrrad_initiativen_form_alter(&$form, FormStateInterface $form_state, $form_id) {
     
     if($form_id == 'search_block_form'){        
         $form['keys']['#title'] = 'Suchbegriff';
