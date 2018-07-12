@@ -43,6 +43,12 @@ h1, .h1 {
 .form-submit {
     @include border-radius(0);
 }
+.form-item {
+    position: relative;
+}
+.webform-submission-form {
+    position: relative;
+}
 
 .field--name-webform {
     margin-top: 30px;

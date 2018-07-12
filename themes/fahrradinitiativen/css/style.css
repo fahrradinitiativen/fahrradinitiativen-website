@@ -50,6 +50,12 @@ h1, .h1 {
   -ms-border-radius: 0;
   border-radius: 0; }
 
+.form-item {
+  position: relative; }
+
+.webform-submission-form {
+  position: relative; }
+
 .field--name-webform {
   margin-top: 30px; }
 
@@ -390,6 +396,9 @@ h1, .h1 {
 
 .path-beitraege h1.page-header {
   display: none; }
+
+.links {
+  position: relative; }
 
 .field--name-field-tags {
   margin-top: 1em; }

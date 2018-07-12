@@ -9,9 +9,20 @@
   ]
 %}
 
+{#
+{{ kint(content.field_image) }}
+#}
 
     {# Page #}
     {% if page %}
+        <div class="row">
+            <div class="col-sm-12">
+                {{ content.field_tags_bundesland }}
+                {{ content.field_tags_stadt }}
+                {{ content.field_tags_kategorie }}
+                {{ content.field_tags_art }}
+            </div>
+        </div>
                 <div class="row">
             <div class="col-sm-9">
 <article{{ attributes.addClass(classes) }}>  
