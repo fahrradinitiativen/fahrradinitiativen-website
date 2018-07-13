@@ -5,8 +5,7 @@
     margin-bottom: 0;
     padding: 20px 30px;
     min-height: 160px;
-    background: url(../img/changing-cities.png) right 30px top 15px no-repeat $blue;
-    background-size: 335px;
+    background: $blue;
     .navbar-brand {
         font-size: 30px;
         color: #fff;
@@ -17,9 +16,27 @@
         height: auto;
         line-height: 1;
     }
+    #block-changingcities {
+        float: right;
+        p {
+            margin: 0;
+        }
+        img {
+            max-width: 335px;
+        }
+        @media only screen and (max-width: 767px) {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            img {
+                max-width: 300px;
+                margin: 1em 0 1em -150px;
+            }
+        }
+    }
     @media only screen and (max-width: 767px) {
         min-height: 120px;
-        background: url(../img/changing-cities-mobile.png) bottom 20px center no-repeat $blue;
+        background: $blue;
         background-size: 260px;
         padding-bottom: 60px;
         .navbar-brand {
@@ -65,8 +82,14 @@
                     border-bottom-color: rgba(255,255,255,.6);
                 }
             }
-            &:last-child {
-                float: right;
+            @media only screen and (min-width: 768px) {
+                &:last-child {
+                    float: right;
+                }
+                &:nth-child(3) {
+                    float: right;
+                    margin-right: 0;
+                }
             }
             .dropdown-menu {
                 max-width: 170px;
@@ -74,6 +97,10 @@
                 @include border-radius(0);
                 -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0);
                 box-shadow: 0 0 0 0 rgba(0,0,0,0);
+                @media only screen and (max-width: 767px) {
+                    max-width: 100%;
+                    width: 100%;
+                }
                 li {
                     margin: 0;
                     float: none;

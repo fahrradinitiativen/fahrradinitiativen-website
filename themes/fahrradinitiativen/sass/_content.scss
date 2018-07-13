@@ -122,6 +122,84 @@ article.pool.full,
         padding-bottom: 1em;
         margin-bottom: 1em;
     }
+    .flippy {
+        display: none;
+    }
+}
+.pool-tax {
+    margin-bottom: 20px;
+    .field {
+        .field--item {
+            background: $blue;
+            color: #fff;
+            float: left;
+            display: inline-block;
+            padding: 6px 12px 6px 12px;
+            margin-right: 15px;
+        }
+    }
+}
+.link-overview {
+    display: inline-block;
+    position: relative;
+    background: url(../img/overview.png) no-repeat center center;
+    width: 20px;
+    height: 20px;
+    text-indent: -999em;
+    background-size: contain;
+    position: absolute;
+    z-index: 12;
+    right: 67px;
+    top: 50px;
+    &:hover {
+        opacity: .5;
+    }
+}
+.region-content {
+    position: relative;
+}
+#block-flippyblock {
+    position: absolute;
+    z-index: 11;
+    right: 0;
+    top: 50px;
+    .flippy-previous {
+        a {
+            display: inline-block;
+            width: 22px;
+            height: 18px;
+            background: url(../img/arrow-light.png) no-repeat left center;
+            background-size: 22px;
+            text-indent: 999em;
+            padding: 0;
+            margin: 0;
+            -moz-transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+    }
+    .flippy-next {
+        a {
+            display: inline-block;
+            width: 22px;
+            height: 18px;
+            background: url(../img/arrow-light.png) no-repeat left center;
+            background-size: 22px;
+            text-indent: -999em;
+            padding: 0;
+            margin: 0 0 0 70px;
+        }
+    }
+    .flippy {
+        padding: 0;
+        a {
+            &:hover {
+                opacity: .5;
+            }
+        }
+    }
 }
 
 .view-taxonomy-term article {
@@ -150,6 +228,15 @@ article.pool.full,
         border: 1px solid $blue;
         color: #fff;
         @include border-radius(0);
+        min-width: 160px;
+    }
+}
+
+#block-views-block-pool-related {
+    h2.block-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 2em 0 1em 0;
     }
 }
 

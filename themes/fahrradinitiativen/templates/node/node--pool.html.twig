@@ -15,12 +15,15 @@
 
     {# Page #}
     {% if page %}
-        <div class="row">
-            <div class="col-sm-12">
+        <a href="javascript:history.back()" class="link-overview">zurück zur Übersicht</a>
+        <div class="row pool-tax">
+            <div class="col-sm-9">
                 {{ content.field_tags_bundesland }}
                 {{ content.field_tags_stadt }}
                 {{ content.field_tags_kategorie }}
                 {{ content.field_tags_art }}
+            </div>
+            <div class="col-sm-3">
             </div>
         </div>
                 <div class="row">
@@ -36,7 +39,7 @@
                     {{ label }}
                 </h1>
                 {% endif %}
-                {{ content|without('field_image','field_logo','field_email','field_link','field_facebook','field_twitter','field_linkedin','field_xing','field_kontakt','field_vcf','field_tags_initiativen','field_tags','field_experten') }}
+                {{ content|without('field_image','field_logo','field_email','field_link','field_facebook','field_twitter','field_linkedin','field_xing','field_kontakt','field_vcf','field_tags_initiativen','field_tags','field_experten','field_tags_bundesland','field_tags_stadt','field_tags_kategorie','field_tags_art') }}
 
 
 

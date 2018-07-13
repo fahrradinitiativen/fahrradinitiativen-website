@@ -53,3 +53,10 @@ h1, .h1 {
 .field--name-webform {
     margin-top: 30px;
 }
+
+.bef-exposed-form .form--inline > .form-item.form-item-sort-bef-combine {
+    float: right;
+    .select-wrapper {
+        margin-right: 0;
+    }
+}
