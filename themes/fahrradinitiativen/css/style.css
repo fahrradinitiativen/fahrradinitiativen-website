@@ -542,7 +542,7 @@ article.pool.full,
   position: absolute;
   z-index: 12;
   right: 67px;
-  top: 50px; }
+  top: 4px; }
   .link-overview:hover {
     opacity: .5; }
 
@@ -553,7 +553,7 @@ article.pool.full,
   position: absolute;
   z-index: 11;
   right: 0;
-  top: 50px; }
+  top: 4px; }
   #block-flippyblock .flippy-previous a {
     display: inline-block;
     width: 22px;
