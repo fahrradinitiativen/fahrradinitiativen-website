@@ -511,7 +511,14 @@ article.pool.full,
   .view-taxonomy-term article.pool .field--name-field-image {
     float: left;
     padding: 0 1em 1em 0;
-    background: #fff; }
+    background: #fff;
+    width: 400px;
+    max-width: 100%; }
+    @media only screen and (max-width: 767px) {
+      article.pool.full .field--name-field-image,
+      .view-taxonomy-term article.pool .field--name-field-image {
+        padding: 0 0 1em 0;
+        width: 100%; } }
   article.pool.full .field--name-field-subline,
   .view-taxonomy-term article.pool .field--name-field-subline {
     border-bottom: 3px solid #273748;
@@ -530,6 +537,10 @@ article.pool.full,
     display: inline-block;
     padding: 6px 12px 6px 12px;
     margin-right: 15px; }
+    @media only screen and (max-width: 767px) {
+      .pool-tax .field .field--item {
+        margin-right: 5px;
+        font-size: 11px; } }
 
 .link-overview {
   display: inline-block;
@@ -621,6 +632,9 @@ article.pool.full,
     width: 33.3%;
     background: transparent;
     border: 0; }
+    @media only screen and (max-width: 767px) {
+      .view-pool .masonry-item {
+        width: 100%; } }
     .view-pool .masonry-item article {
       background: #273748;
       color: #fff; }
