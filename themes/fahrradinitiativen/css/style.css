@@ -803,4 +803,12 @@ article.pool.full,
 .search-help-link {
   display: none; }
 
+article.webform {
+  background: #fff;
+  padding: 15px; }
+  article.webform form .form-item {
+    margin-bottom: 1.5em; }
+    article.webform form .form-item.form-type-checkbox {
+      margin-bottom: 10px; }
+
 /*# sourceMappingURL=style.css.map */

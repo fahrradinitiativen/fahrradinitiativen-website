@@ -485,3 +485,16 @@ article.pool.full,
 .search-help-link {
     display: none;
 }
+
+article.webform {
+    background: #fff;
+    padding: 15px;
+    form {
+        .form-item {
+            margin-bottom: 1.5em;
+            &.form-type-checkbox {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
