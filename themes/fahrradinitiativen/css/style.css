@@ -825,4 +825,9 @@ article.webform {
     article.webform form .form-item.form-type-checkbox {
       margin-bottom: 10px; }
 
+article.page {
+  background: #273748;
+  color: #fff;
+  padding: 15px; }
+
 /*# sourceMappingURL=style.css.map */
