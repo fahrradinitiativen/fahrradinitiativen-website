@@ -493,6 +493,10 @@ article.pool.full,
     .page-header {
         display: none;
     }
+    article.page {
+        padding: 0;
+        background: transparent;
+    }
 }
 
 .search-help-link {

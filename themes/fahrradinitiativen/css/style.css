@@ -813,6 +813,9 @@ article.pool.full,
 
 .path-frontpage .page-header {
   display: none; }
+.path-frontpage article.page {
+  padding: 0;
+  background: transparent; }
 
 .search-help-link {
   display: none; }
