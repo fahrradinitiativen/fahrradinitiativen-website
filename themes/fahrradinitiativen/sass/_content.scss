@@ -91,6 +91,10 @@ article.blog {
         float: left;
         padding: 0 1em 1em 0;
         background: #fff;
+        img {
+            width: 390px;
+            
+        }
     }
     .field--name-field-date {
         font-size: 19px;
@@ -141,6 +145,7 @@ article.pool.full,
             float: left;
             display: inline-block;
             padding: 6px 12px 6px 12px;
+            margin-top: 5px;
             margin-right: 15px;
             @media only screen and (max-width: 767px) {
                 margin-right: 5px;
@@ -342,9 +347,10 @@ article.pool.full,
         .field--name-field-date {
             background: $blue;
             color: #fff;
-            font-size: 26px;
+            font-size: 16px;
+            font-weight: normal;
             margin: 0;
-            padding: 0 15px 0;
+            padding: 6px 15px 0;
         }
         .field--name-body {
             display: none;
@@ -355,7 +361,8 @@ article.pool.full,
             padding: 0;
         }
     }
-    .view-footer {
+    .view-header {
+        margin-bottom: 15px;
         background: $turquoise;
         a {
             display: block;

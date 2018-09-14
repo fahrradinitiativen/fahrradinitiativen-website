@@ -423,6 +423,47 @@ h1, .h1 {
 #block-fahrradinitiativen-search .description {
   display: none; }
 
+#block-mailchimp input.email {
+  background: #273748;
+  border: 0;
+  color: #fff;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #273748;
+  display: block;
+  width: 100%; }
+#block-mailchimp .input-group {
+  margin-top: 8px; }
+#block-mailchimp ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  #block-mailchimp ul li {
+    padding: 0;
+    margin: 0; }
+    #block-mailchimp ul li input {
+      float: left;
+      width: 20px; }
+    #block-mailchimp ul li label {
+      display: block;
+      float: left;
+      width: 300px;
+      font-weight: normal; }
+#block-mailchimp #mc-embedded-subscribe {
+  background: url(../img/arrow.png) no-repeat center right #273748;
+  background-size: 20px;
+  color: #fff;
+  height: 34px;
+  padding: 6px 32px 6px 12px;
+  font-size: 14px;
+  border: 1px solid #273748;
+  border-right: 10px solid #273748; }
+  #block-mailchimp #mc-embedded-subscribe:hover {
+    background-color: #009db1;
+    background-image: url(../img/arrow-turquoise.png);
+    border-color: #009db1; }
+
 .path-beitraege h1.page-header {
   display: none; }
 
@@ -488,6 +529,8 @@ article.blog {
     float: left;
     padding: 0 1em 1em 0;
     background: #fff; }
+    article.blog .field--name-field-image img {
+      width: 390px; }
   article.blog .field--name-field-date {
     font-size: 19px;
     font-weight: 600;
@@ -536,6 +579,7 @@ article.pool.full,
     float: left;
     display: inline-block;
     padding: 6px 12px 6px 12px;
+    margin-top: 5px;
     margin-right: 15px; }
     @media only screen and (max-width: 767px) {
       .pool-tax .field .field--item {
@@ -697,18 +741,20 @@ article.pool.full,
     #block-views-block-front-blog article .field--name-field-date {
       background: #273748;
       color: #fff;
-      font-size: 26px;
+      font-size: 16px;
+      font-weight: normal;
       margin: 0;
-      padding: 0 15px 0; }
+      padding: 6px 15px 0; }
     #block-views-block-front-blog article .field--name-body {
       display: none; }
     #block-views-block-front-blog article .links {
       background: #273748;
       margin: 0;
       padding: 0; }
-  #block-views-block-front-blog .view-footer {
+  #block-views-block-front-blog .view-header {
+    margin-bottom: 15px;
     background: #009db1; }
-    #block-views-block-front-blog .view-footer a {
+    #block-views-block-front-blog .view-header a {
       display: block;
       padding: 15px 15px 30px;
       font-size: 26px;
@@ -716,7 +762,7 @@ article.pool.full,
       color: #fff;
       background: url(../img/arrow-turquoise.png) right 15px bottom 15px no-repeat #009db1;
       background-size: 22px; }
-      #block-views-block-front-blog .view-footer a:hover {
+      #block-views-block-front-blog .view-header a:hover {
         opacity: .6; }
 
 #block-views-block-front-experts {
