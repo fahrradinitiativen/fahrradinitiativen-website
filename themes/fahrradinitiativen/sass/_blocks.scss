@@ -34,6 +34,7 @@
                 margin-bottom: 6px;
                 a {
                     font-size: 13px;
+                    word-wrap: break-word;
                 }
             }
             .field--name-field-facebook,
@@ -204,6 +205,9 @@
                     float: left;
                     width: 300px;
                     font-weight: normal;
+                    @media only screen and (max-width: 991px) {
+                        width: 220px;
+                    }
                 }
             }
         }

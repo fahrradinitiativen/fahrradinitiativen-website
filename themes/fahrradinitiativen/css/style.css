@@ -327,7 +327,8 @@ h1, .h1 {
     margin-bottom: 6px; }
     .region-sidebar-second .block .field--name-field-email a,
     .region-sidebar-second .block .field--name-field-link a {
-      font-size: 13px; }
+      font-size: 13px;
+      word-wrap: break-word; }
   .region-sidebar-second .block .field--name-field-facebook,
   .region-sidebar-second .block .field--name-field-twitter,
   .region-sidebar-second .block .field--name-field-xing,
@@ -450,6 +451,9 @@ h1, .h1 {
       float: left;
       width: 300px;
       font-weight: normal; }
+      @media only screen and (max-width: 991px) {
+        #block-mailchimp ul li label {
+          width: 220px; } }
 #block-mailchimp #mc-embedded-subscribe {
   background: url(../img/arrow.png) no-repeat center right #273748;
   background-size: 20px;
@@ -600,6 +604,9 @@ article.pool.full,
   top: 4px; }
   .link-overview:hover {
     opacity: .5; }
+  @media (max-width: 768px) {
+    .link-overview {
+      right: 42px; } }
 
 .region-content {
   position: relative; }
@@ -609,6 +616,9 @@ article.pool.full,
   z-index: 11;
   right: 0;
   top: 4px; }
+  @media (max-width: 768px) {
+    #block-flippyblock ul.flippy li {
+      padding: 6px; } }
   #block-flippyblock .flippy-previous a {
     display: inline-block;
     width: 22px;
@@ -632,6 +642,9 @@ article.pool.full,
     text-indent: -999em;
     padding: 0;
     margin: 0 0 0 70px; }
+    @media (max-width: 768px) {
+      #block-flippyblock .flippy-next a {
+        margin: 0 0 0 35px; } }
   #block-flippyblock .flippy {
     padding: 0; }
     #block-flippyblock .flippy a:hover {
