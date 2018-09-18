@@ -332,7 +332,13 @@ class FlippyPager {
       foreach ($results as $key => $result) {
         // If the query returned no results, it means we're already
         // at the beginning/end of the pager, so ignore those.
-        if (count($result) > 0) {
+        if(is_numeric($result)){
+          // Otherwise we save the node ID.
+          $node_ids[$key] = (int)$result;
+          continue;
+        }
+
+        if (is_array($result) && count($result) > 0) {
           // Otherwise we save the node ID.
           $node_ids[$key] = $results[$key];
         }
